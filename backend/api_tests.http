@@ -1,0 +1,9 @@
+### Test Sign Up API
+POST http://localhost:3000/register/
+Content-Type: application/json
+
+{
+    "username": "TestUser",
+    "email": "testemail001@gmail.com",
+    "password": "test@123"
+}
