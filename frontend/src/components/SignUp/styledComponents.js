@@ -5,8 +5,8 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
 
     @media screen and (min-width: 768px) {
         height: 100vh;
@@ -16,7 +16,7 @@ export const MainContainer = styled.div`
 
 export const CardContainer = styled.div`
     background-color: #2A2B3D;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,21 +109,21 @@ export const LogoText = styled.h1`
     font-family: Montez;
     font-size: 40px;
     font-weight: 500;
-    margin-bottom: 12px;
 `
 
 export const CreateAccountText = styled.h1`
     color: #EEEEEE;
     font-family: Jura;
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
 `
 
 export const DescriptionText = styled.p`
     color: #EEEEEE;
     font-family: Jura;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     text-align: center;
 `
@@ -146,7 +146,7 @@ export const AuthButton = styled.button`
     cursor: pointer;
     border-radius: 6px;
     box-shadow: 0 2px 2px #000000;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 `
 
 export const FormContainer = styled.div`
@@ -291,7 +291,7 @@ export const InputBox = styled.input`
     background-color: #1A1B29;
     color: #DB35CC;
     font-family: Jura;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
     border: none;
     outline: none;
@@ -303,6 +303,14 @@ export const InputBox = styled.input`
         height: 50px;
         border: none;
     }
+`
+
+export const ErrorMessage = styled.p`
+    color: red;
+    font-family: Jura;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
 `
 
 export const SubmitButton = styled.button`
@@ -331,7 +339,7 @@ export const SubmitButton = styled.button`
 `
 
 export const FooterContainer = styled.div`
-    margin-top: 30px;
+    margin-top: 10px;
 
     @media screen and (min-width: 768px) {
         display: none;
@@ -342,13 +350,14 @@ export const MessageText = styled.p`
     color: #EEEEEE;
     font-family: Jura;
     font-size: 20px;
+    text-align: center;
     font-weight: 500;
 `
 
 export const Link = styled.a`
     color: #DB35CC;
     font-family: Jura;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     text-decoration: none;
 `
@@ -359,5 +368,5 @@ export const DeveloperText = styled.p`
     font-size: 12px;
     font-weight: 500;
     text-align: center;
-    margin-top: 24px;
+    margin-top: 15px;
 `

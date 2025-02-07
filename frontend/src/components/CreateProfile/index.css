@@ -1,0 +1,21 @@
+.profile-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-image-button {
+    height: 40px;
+}
+
+.label-text {
+    font-family: Jura;
+}
+
+.profile-preview {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}

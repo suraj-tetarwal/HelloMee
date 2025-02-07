@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Navigate} from 'react-router-dom'
 
 import { AiOutlineUser } from "react-icons/ai"
 import { HiOutlineMail } from "react-icons/hi"
@@ -35,6 +36,7 @@ import {
     ShowPasswordContainer,
     LabelText,
     CheckBox,
+    ErrorMessage,
     SubmitButton,
     FooterContainer,
     MessageText,
@@ -47,7 +49,9 @@ class SignUp extends Component {
         username: '',
         email: '',
         password: '',
+        errorMsg: '',
         showPassword: false,
+        redirectToSignin: false,
     }
 
     onChangeUsername = event => {
@@ -66,15 +70,71 @@ class SignUp extends Component {
         this.setState(prevState => ({showPassword: !prevState.showPassword}))
     }
 
-    onSubmitForm = event => {
+    onSubmitSuccess = () => {
+        this.setState({redirectToSignin: true})
+    }
+
+    onSubmitFailure = (message) => {
+        this.setState({showErrorMsg: true, errorMsg: message})
+    }
+
+    isValidEmail = email => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
+
+    isStrongPassword = password => {
+        return password.length >= 8
+    }
+
+    onSubmitForm = async (event) => {
         event.preventDefault()
         const {username, email, password} = this.state
         const userDetails = {username, email, password}
-        console.log(userDetails)
+
+        let error = ""
+
+        if (!username) {
+            error = "Username is required"
+        } else if (!email) {
+            error = "Email is required"
+        } else if (!this.isValidEmail(email)) {
+            error = "Invalid email format"
+        } else if (!password) {
+            error = "Password is required"
+        } else if (!this.isStrongPassword(password)) {
+            error = "Password must be al least 8 characters long"
+        } 
+
+        if (error) {
+            this.setState({errorMsg: error})
+            return
+        }
+
+        const url = "http://localhost:5000/signup/"
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userDetails),
+        }
+        const response = await fetch(url, options)
+        const data = await response.json()
+        if (response.ok) {
+            this.onSubmitSuccess()
+        }
+        else {
+            this.onSubmitFailure(data.message)
+        }
     }
 
     render() {
-        const {showPassword, username, email, password} = this.state
+        const {showPassword, username, email, password, redirectToSignin, errorMsg} = this.state
+
+        if (redirectToSignin) {
+            return <Navigate to="/signin" />
+        }
+
         return (
             <MainContainer>
                 <CardContainer>
@@ -126,6 +186,7 @@ class SignUp extends Component {
                                 <CheckBox id="showPassword" type="checkbox" checked={showPassword} onChange={this.onToggleCheckbox} />
                                 <LabelText htmlFor="showPassword">Show Password</LabelText>
                             </ShowPasswordContainer>
+                            {errorMsg && <ErrorMessage>*{errorMsg}</ErrorMessage>}
                             <SubmitButton type="submit">
                                 Continue 
                                 <GoTriangleRight 

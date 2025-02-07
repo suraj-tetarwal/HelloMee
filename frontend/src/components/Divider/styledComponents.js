@@ -6,9 +6,9 @@ export const DividerContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 20px 0;
-  margin-top: 25px;
-`
+  margin-top: 10px;
+  margin-bottom: 20px;
+  `
 
 export const Line = styled.div`
   flex: 1;

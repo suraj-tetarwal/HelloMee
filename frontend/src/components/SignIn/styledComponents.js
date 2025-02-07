@@ -5,8 +5,8 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
 
     @media screen and (min-width: 768px) {
         height: 100vh;
@@ -16,7 +16,7 @@ export const MainContainer = styled.div`
 
 export const CardContainer = styled.div`
     background-color: #2A2B3D;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,21 +109,21 @@ export const LogoText = styled.h1`
     font-family: Montez;
     font-size: 40px;
     font-weight: 500;
-    margin-bottom: 12px;
 `
 
-export const CreateAccountText = styled.h1`
+export const SignInText = styled.h1`
     color: #EEEEEE;
     font-family: Jura;
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 500;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 10px;
 `
 
 export const DescriptionText = styled.p`
     color: #EEEEEE;
     font-family: Jura;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     text-align: center;
 `
@@ -146,7 +146,7 @@ export const AuthButton = styled.button`
     cursor: pointer;
     border-radius: 6px;
     box-shadow: 0 2px 2px #000000;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 `
 
 export const FormContainer = styled.div`
@@ -291,7 +291,7 @@ export const InputBox = styled.input`
     background-color: #1A1B29;
     color: #DB35CC;
     font-family: Jura;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
     border: none;
     outline: none;
@@ -305,18 +305,12 @@ export const InputBox = styled.input`
     }
 `
 
-export const ForgotYourPassword = styled.a`
-    color: #FFFFFF;
+export const ErrorMessage = styled.p`
+    color: red;
     font-family: Jura;
     font-size: 20px;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 2px solid #FFFFFF;
-
-    @media screen and (min-width: 768px) {
-        padding: 2px;
-        margin-bottom: 10px;
-    }
+    font-weight: 500;
+    margin-bottom: 12px;
 `
 
 export const SubmitButton = styled.button`
@@ -335,7 +329,8 @@ export const SubmitButton = styled.button`
     outline: none
     cursor: pointer;
     border-radius: 6px;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     box-shadow: 0 2px 2px #000000;
 
     @media screen and (min-width: 768px) {
@@ -345,18 +340,38 @@ export const SubmitButton = styled.button`
 `
 
 export const FooterContainer = styled.div`
-    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
 
     @media screen and (min-width: 768px) {
         display: none;
     }
 `
 
+export const ForgotYourPassword = styled.a`
+        color: #FFFFFF;
+        font-family: Jura;
+        font-size: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        border-bottom: 2px solid #FFFFFF;
+        margin-bottom: 15px;
+    
+        @media screen and (min-width: 768px) {
+            padding: 2px;
+            margin-bottom: 10px;
+        }
+`
+
 export const MessageText = styled.p`
     color: #EEEEEE;
     font-family: Jura;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
+    text-align: center;
 `
 
 export const Link = styled.a`
@@ -373,5 +388,5 @@ export const DeveloperText = styled.p`
     font-size: 12px;
     font-weight: 500;
     text-align: center;
-    margin-top: 24px;
+    margin-top: 15px;
 `
