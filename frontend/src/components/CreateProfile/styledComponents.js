@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const MainContainer = styled.div`
     background-color: #1A1B29;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,6 +54,16 @@ export const ImageContainer = styled.div`
     margin-bottom: 20px;
 `
 
+export const LoaderContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    padding: 5px;
+`
+
 export const ProfileImage = styled.img`
     display: block;
     height: 100%;
@@ -85,7 +94,6 @@ export const PopupContainer = styled.div`
     left: 0;
     display: flex;
     justify-content: center;
-    // align-items: center;
     z-index: 999;
 `
 
@@ -266,50 +274,121 @@ export const ResetButton = styled.button`
     padding: 10px;
 `
 
-export const InputBox = styled.input`
+export const ProfileDetailContainer = styled.div`    display: flex;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+`
+
+export const DetailGroup = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+`
+
+export const DetailGroupHeading = styled.h1`
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+`
+
+export const InfoText = styled.p`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px
+`
+
+export const Label = styled.span`
+    color: #E8E8E8;
+    font-family: Jura;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 8px;
+`
+
+export const Value = styled.span`
+    color: #A0A0A0;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+`
+
+export const PasswordContainer = styled.div`
+    background-color: #1A1B29;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-itesm: center;
+    border-radius: 6px;
+    padding-right: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+`
+
+export const PasswordToggleButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+`
+
+export const FieldContainer = styled.div`
+    background-color: #1A1B29;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 6px;
+    padding-left: 8px;
+    margin-bottom: 8px;
+`
+
+export const InputField = styled.input`
     background-color: #1A1B29;
     height: 40px;
     width: 100%;
     color: #FFFFFF;
     font-family: Jura;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     border: none;
     border-radius: 6px;
     outline: none;
-    padding: 10px;
-    margin-bottom: 12px;
+    padding: 8px;
 `
 
-export const FileInput = styled.input`
-    border: 1px solid red;
-`
-
-export const AboutContainer = styled.div`
+export const BioContainer = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
 `
 
-export const TextAreaInput = styled.textarea`
+export const BioTextarea = styled.textarea`
     background-color: #1A1B29;
-    height: 100px;
+    min-height: 100px;
     width: 100%;
     color: #FFFFFF;
     font-family: Jura;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     border: none;
     border-radius: 6px;
     outline: none;
-    padding: 10px;
+    padding: 8px;
     margin-bottom: 8px;
 `
 
-export const CharacterCounter = styled.p`
+export const BioCharCount = styled.p`
     color: #FFFFFF;
     font-family: Jura;
     font-size: 14px;
     font-weight: 500;
-    align-self: flex-end; 
+    align-self: flex-start; 
 `

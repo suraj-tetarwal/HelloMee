@@ -2,9 +2,15 @@ import React, {Component} from 'react'
 import Cropper from 'react-cropper'
 import Popup from 'reactjs-popup'
 import {toast, ToastContainer, Slide} from 'react-toastify'
+import {Oval} from 'react-loader-spinner'
 
-import { FaUserCircle } from "react-icons/fa"
+// import icons from react-icons
+import { FaUserCircle, FaUser, FaLink, FaBriefcase } from "react-icons/fa"
 import { IoRefresh, IoCrop, IoClose } from 'react-icons/io5'
+import { LuEye, LuEyeOff } from 'react-icons/lu'
+import { MdLocationPin } from 'react-icons/md'
+import { BiSolidTag } from 'react-icons/bi'
+// import { MdEdit } from 'react-icons/md'
 
 import 'reactjs-popup/dist/index.css'
 import 'cropperjs/dist/cropper.css'
@@ -19,6 +25,7 @@ import {
     FormContainer,
     ProfileImageContainer,
     ImageContainer,
+    LoaderContainer,
     ProfileImage,
     UploadImageButton,
     PopupContainer,
@@ -37,12 +44,27 @@ import {
     CropButton,
     DoneButton,
     ResetButton,
-    // InputBox,
-    // FileInput,
-    // AboutContainer,
-    // TextAreaInput,
-    // CharacterCounter,
+    ProfileDetailContainer,
+    DetailGroup,
+    DetailGroupHeading,
+    InfoText,
+    Label,
+    Value,
+    PasswordContainer,
+    PasswordToggleButton,
+    FieldContainer,
+    InputField,
+    BioContainer,
+    BioTextarea,
+    BioCharCount,
 } from './styledComponents'
+
+const uploadStatusConstants = {
+    initial: 'INITIAL',
+    success: 'SUCCESS',
+    failure: 'FAILURE',
+    inProgress: 'IN_PROGRESS',
+}
 
 class CreateProfile extends Component {
     state = {
@@ -50,7 +72,8 @@ class CreateProfile extends Component {
         previewImage: null,
         croppedImage: null,
         publicId: null,
-        isUploading: false,
+        uploadStatus: uploadStatusConstants.initial,
+        showPassword: false,
     }
 
     cropperRef = React.createRef()
@@ -138,6 +161,10 @@ class CreateProfile extends Component {
                 this.deleteUploadedImage()
             }
 
+            this.setState({
+                uploadStatus: uploadStatusConstants.inProgress,
+            })
+
             // Creating FormData object to send the Blob
             const formData = new FormData()
             formData.append("file", croppedImage)
@@ -158,8 +185,12 @@ class CreateProfile extends Component {
                     publicId: public_id,
                     previewImage: null,
                     croppedImage: null,
+                    uploadStatus: uploadStatusConstants.success,
                 })
             } else {
+                this.setState({
+                    uploadStatus: uploadStatusConstants.failure,
+                })
                 toast.error("Something went wrong.")
             }
         } catch(error) {
@@ -200,9 +231,43 @@ class CreateProfile extends Component {
         }
     }
 
+    renderLoader = () => {
+        return (
+            <LoaderContainer>
+                <Oval color="#FFFFFF" secondaryColor="#CCCCCC" strokeWidth={5} height="25" width="25" />
+            </LoaderContainer>
+        )
+    }
+
+    renderProfileImage = () => {
+        const {profileImage} = this.state
+        return <ProfileImage src={profileImage} alt="profile image" />
+    }
+
+    renderPlaceholderIcon = () => {
+        return <FaUserCircle color="#FFFFFF" size="100px" />
+    }
+
+    renderProfileSection = () => {
+        const {uploadStatus} = this.state
+        switch (uploadStatus) {
+            case uploadStatusConstants.inProgress:
+                return this.renderLoader()
+            case uploadStatusConstants.success:
+                return this.renderProfileImage()
+            case uploadStatusConstants.failure:
+                return this.renderPlaceholderIcon()
+            default:
+                return this.renderPlaceholderIcon()
+        }
+    }
+
+    togglePassword = () => {
+        this.setState(prevState => ({showPassword: !prevState.showPassword}))
+    }
+
     render() {
-        const {previewImage, profileImage, publicId} = this.state
-        console.log(`Public Id: ${publicId}`)
+        const {previewImage, showPassword} = this.state
         return (
             <MainContainer>
                 <ToastContainer 
@@ -218,11 +283,7 @@ class CreateProfile extends Component {
                     <FormContainer>
                         <ProfileImageContainer>
                             <ImageContainer>
-                                {
-                                    profileImage ?
-                                    <ProfileImage src={profileImage} alt="profile image" /> :
-                                    <FaUserCircle color="#FFFFFF" size="100px" />
-                                }
+                                {this.renderProfileSection()}
                             </ImageContainer>
                             <Popup 
                                 trigger={<UploadImageButton type="button">Upload Image</UploadImageButton>} 
@@ -283,6 +344,67 @@ class CreateProfile extends Component {
                                 )}
                             </Popup>
                         </ProfileImageContainer>
+                        <ProfileDetailContainer>
+                            <DetailGroup>
+                                <DetailGroupHeading>Account Details</DetailGroupHeading>
+                                <InfoText>
+                                    <Label>Email: </Label>
+                                    <Value>lord.skt210503@gmail.com</Value>
+                                </InfoText>
+                                <InfoText>
+                                    <Label>Username: </Label>
+                                    <Value>LordSkte</Value>
+                                </InfoText>
+                                <PasswordContainer>
+                                    <InputField type={showPassword ? "text" : "password"} value="@Mee251219" readOnly />
+                                    <PasswordToggleButton type="button" onClick={this.togglePassword}>
+                                        {
+                                            showPassword ? (
+                                                <LuEyeOff color="#FFFFFF" size={18} />
+                                            ) : (
+                                                <LuEye color="#FFFFFF" size={18} />
+                                            )
+                                        }
+                                    </PasswordToggleButton>
+                                </PasswordContainer>
+                            </DetailGroup>
+                            <DetailGroup>
+                                <DetailGroupHeading>Basic Details</DetailGroupHeading>
+                                <FieldContainer>
+                                    <FaUser color="#FFFFFF" size={18} />
+                                    <InputField type="text" placeholder="First name (e.g., John)" />
+                                </FieldContainer>
+                                <FieldContainer>
+                                    <BiSolidTag color="#FFFFFF" size={18} />
+                                    <InputField type="text" placeholder="Last name (e.g., Doe)" />
+                                </FieldContainer>
+                                <BioContainer>
+                                    <BioTextarea placeholder="Write something about yourself... (keep it short & fun!)"></BioTextarea>
+                                    <BioCharCount>0/200</BioCharCount>
+                                </BioContainer>
+                            </DetailGroup>
+                            <DetailGroup>
+                                <DetailGroupHeading>Profession</DetailGroupHeading>
+                                <FieldContainer>
+                                    <FaBriefcase color="#FFFFFF" size={18} />
+                                    <InputField type="text" placeholder="e.g., Software Engineer, Designer..." />
+                                </FieldContainer>
+                            </DetailGroup>
+                            <DetailGroup>
+                                <DetailGroupHeading>Social</DetailGroupHeading>
+                                <FieldContainer>
+                                    <FaLink color="#FFFFFF" size={16} />
+                                    <InputField text="text" placeholder="e.g., https://yourwebsite.com" />
+                                </FieldContainer>
+                            </DetailGroup>
+                            <DetailGroup>
+                                <DetailGroupHeading>Location</DetailGroupHeading>
+                                <FieldContainer>
+                                    <MdLocationPin color="#FFFFFF" size={20} />
+                                    <InputField text="text" placeholder="Where are you from? (e.g., India, Mars)" />
+                                </FieldContainer>
+                            </DetailGroup>
+                        </ProfileDetailContainer>
                     </FormContainer>
                 </CardContainer>
             </MainContainer>
