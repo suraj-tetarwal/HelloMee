@@ -1,9 +1,61 @@
 ### Test Sign Up API
-POST http://localhost:3000/register/
+POST http://localhost:5000/sign-up/
 Content-Type: application/json
 
 {
-    "username": "TestUser",
-    "email": "testemail001@gmail.com",
-    "password": "test@123"
+    "username": "rahul_mishra",
+    "email": "rahul.mishra@example.com",
+    "password": "rahul@654"
 }
+
+
+
+### Test Sign in API
+POST http://localhost:5000/sign-in/
+Content-Type: application/json
+
+{
+    "email": "rahul.mishra@example.com",
+    "password": "rahul@654"
+}
+
+
+
+### Test Profile Exist API
+GET http://localhost:5000/profile/status/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2MxYTQ1ZGNlMjgwMjdjOWEzMTJiMzIiLCJlbWFpbCI6InJhaHVsLm1pc2hyYUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDc0OTE4OX0.MPHOFxhZQasmfSjJUGyHLbcgA0fyTm6r0FKauCv1EXw
+
+
+
+### Test User Details API
+GET http://localhost:5000/user/details/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2MxYTQ1ZGNlMjgwMjdjOWEzMTJiMzIiLCJlbWFpbCI6InJhaHVsLm1pc2hyYUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDc0OTE4OX0.MPHOFxhZQasmfSjJUGyHLbcgA0fyTm6r0FKauCv1EXw
+
+
+
+### Test Create Profile API
+POST http://localhost:5000/profile/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2MxYTQ1ZGNlMjgwMjdjOWEzMTJiMzIiLCJlbWFpbCI6InJhaHVsLm1pc2hyYUBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDc0OTE4OX0.MPHOFxhZQasmfSjJUGyHLbcgA0fyTm6r0FKauCv1EXw
+Content-Type: application/json
+
+{
+    "firstName": "Rahul",
+    "lastName": "Mishra",
+    "bio": "Traveler | Foodie | Photographer",
+    "profession": "Photographer",
+    "socialLink": "https://instagram.com/in/rahulmishra",
+    "location": "Delhi, India"
+}
+
+### Test Create Post API
+POST http://localhost:5000/new-post/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2MxYTNjZGNlMjgwMjdjOWEzMTJiMmEiLCJlbWFpbCI6InZpc2hhbC5zaW5naEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MDc0NTA1MH0.Prfgz7eY_oI1wnSQanHdIA2sZ2p239Upv28uJBlT2V4
+Content-Type: application/json
+
+{
+    "caption": "New painting completed! What do you think?",
+    "mediaUrl": "https://example.com/image/painting.png"
+}
+
+### Test Fetch Posts API 
+GET http://localhost:5000/posts/

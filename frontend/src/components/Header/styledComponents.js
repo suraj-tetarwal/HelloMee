@@ -1,16 +1,18 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
-    position: fixed;
-    height: 70px;
+    position: sticky;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: #1A1B29;
+    background: rgba(10, 10, 10, 0.5);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 12px;
+    border-bottom: 0.5px solid #BDBDBD;
+    backdrop-filter: blur(10px);
 `
 
 export const UserProfile = styled.div`
@@ -35,4 +37,19 @@ export const LogoText = styled.h1`
         color: #DB35CC;
         transition: all 1.5s ease;
     }
+`
+
+export const LogoutButton = styled.button`
+    background-color: transparent;
+    height: 40px;
+    color: #E63946;
+    font-family: Jura;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid #E63946;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    padding-left: 8px;
+    padding-right: 8px;
 `

@@ -1,5 +1,5 @@
-import {Component} from 'react'
-import {Navigate} from 'react-router-dom'
+import { Component } from 'react'
+import { toast } from 'react-toastify'
 
 import { AiOutlineUser } from "react-icons/ai"
 import { HiOutlineMail } from "react-icons/hi"
@@ -36,7 +36,6 @@ import {
     ShowPasswordContainer,
     LabelText,
     CheckBox,
-    ErrorMessage,
     SubmitButton,
     FooterContainer,
     MessageText,
@@ -49,9 +48,7 @@ class SignUp extends Component {
         username: '',
         email: '',
         password: '',
-        errorMsg: '',
         showPassword: false,
-        redirectToSignin: false,
     }
 
     onChangeUsername = event => {
@@ -70,47 +67,15 @@ class SignUp extends Component {
         this.setState(prevState => ({showPassword: !prevState.showPassword}))
     }
 
-    onSubmitSuccess = () => {
-        this.setState({redirectToSignin: true})
-    }
-
-    onSubmitFailure = (message) => {
-        this.setState({showErrorMsg: true, errorMsg: message})
-    }
-
-    isValidEmail = email => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    }
-
-    isStrongPassword = password => {
-        return password.length >= 8
-    }
-
     onSubmitForm = async (event) => {
         event.preventDefault()
+
+        const toastId = toast.loading("Creating your account...")
+        
         const {username, email, password} = this.state
         const userDetails = {username, email, password}
 
-        let error = ""
-
-        if (!username) {
-            error = "Username is required"
-        } else if (!email) {
-            error = "Email is required"
-        } else if (!this.isValidEmail(email)) {
-            error = "Invalid email format"
-        } else if (!password) {
-            error = "Password is required"
-        } else if (!this.isStrongPassword(password)) {
-            error = "Password must be al least 8 characters long"
-        } 
-
-        if (error) {
-            this.setState({errorMsg: error})
-            return
-        }
-
-        const url = "http://localhost:5000/signup/"
+        const url = "http://localhost:5000/sign-up/"
         const options = {
             method: "POST",
             headers: {
@@ -118,23 +83,33 @@ class SignUp extends Component {
             },
             body: JSON.stringify(userDetails),
         }
+
         const response = await fetch(url, options)
+        
         const data = await response.json()
         if (response.ok) {
-            this.onSubmitSuccess()
+            const {history} = this.props
+            toast.update(toastId, {
+                render: "Boom! Your account is ready. Now, sign in and let's go!",
+                type: "success",
+                isLoading: false,
+                autoClose: 5000
+            })
+            history.replace('/sign-in')
         }
         else {
-            this.onSubmitFailure(data.message)
+            const {message} = data
+            toast.update(toastId, {
+                render: message,
+                type: "error",
+                isLoading: false,
+                autoClose: 5000
+            })
         }
     }
 
     render() {
-        const {showPassword, username, email, password, redirectToSignin, errorMsg} = this.state
-
-        if (redirectToSignin) {
-            return <Navigate to="/signin" />
-        }
-
+        const {showPassword, username, email, password} = this.state
         return (
             <MainContainer>
                 <CardContainer>
@@ -172,21 +147,37 @@ class SignUp extends Component {
                         <Form onSubmit={this.onSubmitForm}>
                             <FieldContainer>
                                 <AiOutlineUser color="#DB35CC" size="30px" />
-                                <InputBox type="text" placeholder="Username" value={username} onChange={this.onChangeUsername} />
+                                <InputBox 
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    required    
+                                    onChange={this.onChangeUsername}
+                                />
                             </FieldContainer>
                             <FieldContainer>
                                 <HiOutlineMail color="#DB35CC" size="30px" />
-                                <InputBox type="text" placeholder="Email" value={email} onChange={this.onChangeEmail} />
+                                <InputBox 
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    required
+                                    onChange={this.onChangeEmail}
+                                />
                             </FieldContainer>
                             <FieldContainer>
                                 <MdOutlineLock color="#DB35CC" size="30px" />
-                                <InputBox type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={this.onChangePassword} />
+                                <InputBox 
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    value={password}
+                                    required
+                                    onChange={this.onChangePassword} />
                             </FieldContainer>
                             <ShowPasswordContainer>
                                 <CheckBox id="showPassword" type="checkbox" checked={showPassword} onChange={this.onToggleCheckbox} />
                                 <LabelText htmlFor="showPassword">Show Password</LabelText>
                             </ShowPasswordContainer>
-                            {errorMsg && <ErrorMessage>*{errorMsg}</ErrorMessage>}
                             <SubmitButton type="submit">
                                 Continue 
                                 <GoTriangleRight 

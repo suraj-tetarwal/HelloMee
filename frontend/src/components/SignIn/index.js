@@ -1,4 +1,6 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 import { HiOutlineMail } from "react-icons/hi"
 import { MdOutlineLock } from "react-icons/md"
@@ -34,7 +36,6 @@ import {
     ShowPasswordContainer,
     LabelText,
     CheckBox,
-    ErrorMessage,
     SubmitButton,
     FooterContainer,
     ForgotYourPassword,
@@ -47,7 +48,6 @@ class SignIn extends Component {
     state = {
         email: '',
         password: '',
-        errorMsg: '',
         showPassword: false,
     }
 
@@ -63,44 +63,32 @@ class SignIn extends Component {
         this.setState({password: event.target.value})
     }
 
-    isValidEmail = email => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    }
-
-    onSubmitSuccess = jwtToken => {
-        console.log(jwtToken)
-    }
-
-    onSubmitFailure = message => {
-        this.setState({errorMsg: message})
-    }
+    // checkProfileExists = async (jwtToken) => {
+    //     const url = "http://localhost:5000/profile/status/"
+    //     const options = {
+    //         method: "GET",
+    //         headers: {
+    //             "Authorization": `Bearer ${jwtToken}`
+    //         }
+    //     }
+    //     const response = await fetch(url, options)
+    //     const data = await response.json()
+    //     const {profile_exist} = data
+    //     return profile_exist
+    // }
 
     onSubmitForm = async (event) => {
         event.preventDefault()
+
+        const toastId = toast.loading("Signing you in...")
+
         const {email, password} = this.state
-
-        let error = ""
-
-        if (!email) {
-            error = "Email is required"
-        } else if (!this.isValidEmail(email)) {
-            error = "Invalid email format"
-        } else if (!password) {
-            error = "Password is required"
-        }
-
-        if (error) {
-            this.setState({errorMsg: error})
-            return
-        }
-        this.setState({errorMsg: ""})
-
         const userDetails = {
             email,
             password,
         }
 
-        const url = "http://localhost:5000/signin/"
+        const url = "http://172.20.10.2:5000/sign-in/"
         const options = {
             method: "POST",
             headers: {
@@ -111,14 +99,48 @@ class SignIn extends Component {
         const response = await fetch(url, options)
         const data = await response.json()
         if (response.ok) {
-            this.onSubmitSuccess(data.jwtToken)
+            const {jwtToken} = data
+            const {history} = this.props
+            Cookies.set("jwt_token", jwtToken, {expires: 30})
+            toast.update(toastId, {
+                render: "Welcome! Taking you to home...",
+                type: "success",
+                isLoading: false,
+                autoClose: 5000
+            })
+            history.replace("/")
+            // const isProfileExists = await this.checkProfileExists(jwtToken)
+            // if (isProfileExists) {
+            //     toast.update(toastId, {
+            //         render: "Welcome back! Taking you to home...",
+            //         type: "success",
+            //         isLoading: false,
+            //         autoClose: 5000
+            //     })
+            //     history.replace("/")
+            // }
+            // else {
+            //     toast.update(toastId, {
+            //         render: "Almost there! Let's set up your profile",
+            //         type: "info",
+            //         isLoading: false,
+            //         autoClose: 5000
+            //     })
+            //     history.replace("/create-profile")
+            // }
         } else {
-            this.onSubmitFailure(data.message)
+            const {message} = data
+            toast.update(toastId, {
+                render: message,
+                type: "error",
+                isLoading: false,
+                autoClose: 5000
+            })
         }
     }
 
     render() {
-        const {email, password, errorMsg, showPassword} = this.state
+        const {email, password, showPassword} = this.state
         return (
             <MainContainer>
                 <CardContainer>
@@ -151,17 +173,28 @@ class SignIn extends Component {
                         <Form onSubmit={this.onSubmitForm}>
                             <FieldContainer>
                                 <HiOutlineMail color="#DB35CC" size="30px" />
-                                <InputBox type="text" placeholder="Email" onChange={this.onChangeEmail} value={email} />
+                                <InputBox 
+                                    type="email" 
+                                    placeholder="Email" 
+                                    value={email} 
+                                    required 
+                                    onChange={this.onChangeEmail}
+                                /> 
                             </FieldContainer>
                             <FieldContainer>
                                 <MdOutlineLock color="#DB35CC" size="30px" />
-                                <InputBox type={showPassword ? "text" : "password"} placeholder="Password" onChange={this.onChangePassword} value={password} />
+                                <InputBox 
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    value={password}
+                                    required
+                                    onChange={this.onChangePassword} 
+                                />
                             </FieldContainer>
                             <ShowPasswordContainer>
                                 <CheckBox id="showPassword" type="checkbox" checked={showPassword} onChange={this.onToggleCheckbox} />
                                 <LabelText htmlFor="showPassword">Show Password</LabelText>
                             </ShowPasswordContainer>
-                            {errorMsg && <ErrorMessage>*{errorMsg}</ErrorMessage>}
                             <SubmitButton type="submit">
                                 Sign in
                                 <GoTriangleRight 

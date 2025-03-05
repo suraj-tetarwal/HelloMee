@@ -1,16 +1,15 @@
 import React, {Component} from 'react'
 import Cropper from 'react-cropper'
+import Cookies from 'js-cookie'
 import Popup from 'reactjs-popup'
-import {toast, ToastContainer, Slide} from 'react-toastify'
-import {Oval} from 'react-loader-spinner'
+import { toast } from 'react-toastify'
+import { Oval } from 'react-loader-spinner'
 
 // import icons from react-icons
 import { FaUserCircle, FaUser, FaLink, FaBriefcase } from "react-icons/fa"
 import { IoRefresh, IoCrop, IoClose } from 'react-icons/io5'
-import { LuEye, LuEyeOff } from 'react-icons/lu'
 import { MdLocationPin } from 'react-icons/md'
 import { BiSolidTag } from 'react-icons/bi'
-// import { MdEdit } from 'react-icons/md'
 
 import 'reactjs-popup/dist/index.css'
 import 'cropperjs/dist/cropper.css'
@@ -50,13 +49,14 @@ import {
     InfoText,
     Label,
     Value,
-    PasswordContainer,
-    PasswordToggleButton,
     FieldContainer,
     InputField,
     BioContainer,
     BioTextarea,
     BioCharCount,
+    ProfileActionButtonContainer,
+    SkipButton,
+    SaveButton,
 } from './styledComponents'
 
 const uploadStatusConstants = {
@@ -73,7 +73,97 @@ class CreateProfile extends Component {
         croppedImage: null,
         publicId: null,
         uploadStatus: uploadStatusConstants.initial,
-        showPassword: false,
+        username: 'your_username',
+        email: '',
+        firstName: '',
+        lastName: '',
+        bio: '',
+        profession: '',
+        socialLink: '',
+        location: '',
+    }
+
+    componentDidMount = () => {
+        this.fetchUserData();
+    }
+
+    fetchUserData = async () => {
+        try {
+            const jwtToken = Cookies.get("jwt_token")
+
+            const url = "http://localhost:5000/user/details"
+            const options = {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${jwtToken}`,
+                },
+            }
+            const response = await fetch(url, options)
+            const data = await response.json()
+            if (response.ok) {
+                const {username, email} = data
+                this.setState({username, email})
+            } else {
+                const {message} = data
+                toast.error(message)
+                this.setState({
+                    username: 'your_username',
+                    email: 'youremail@gmail.com'
+                })
+            }    
+        } catch (e) {
+            toast.error("Something went wrong!!!")
+        }
+    }
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSave = async (event) => {
+        event.preventDefault()
+
+        const jwtToken = Cookies.get('jwt_token')
+
+        const {profileImage, firstName, lastName, bio, profession, socialLink, location} = this.state
+        const userProfileData = {
+            profileImage,
+            firstName,
+            lastName,
+            bio,
+            profession,
+            socialLink,
+            location,
+        }
+
+        const url = "http://localhost:5000/profile/"
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwtToken}`
+            },
+            body: JSON.stringify(userProfileData)
+        }
+
+        const response = await fetch(url, options)
+        const data = await response.json()
+        if (response.ok) {
+            const {history} = this.props
+            const {message} = data
+            toast.success(message)
+            history.replace('/')
+        } else {
+            const {message} = data
+            toast.error(message)
+        }
+    }
+
+    handleSkipProfile = () => {
+        const {history} = this.props
+        history.replace('/')
     }
 
     cropperRef = React.createRef()
@@ -267,17 +357,9 @@ class CreateProfile extends Component {
     }
 
     render() {
-        const {previewImage, showPassword} = this.state
+        const {previewImage, username, email} = this.state
         return (
             <MainContainer>
-                <ToastContainer 
-                    position='top-center' 
-                    autoClose={2000}
-                    closeButton={false}
-                    theme="dark"
-                    limit={2}
-                    transition={Slide}
-                />
                 <CardContainer>
                     <CreateProfileHeading>Set Up Your Profile</CreateProfileHeading>
                     <FormContainer>
@@ -349,37 +431,43 @@ class CreateProfile extends Component {
                                 <DetailGroupHeading>Account Details</DetailGroupHeading>
                                 <InfoText>
                                     <Label>Email: </Label>
-                                    <Value>lord.skt210503@gmail.com</Value>
+                                    <Value>{email}</Value>
                                 </InfoText>
                                 <InfoText>
                                     <Label>Username: </Label>
-                                    <Value>LordSkte</Value>
+                                    <Value>{username}</Value>
                                 </InfoText>
-                                <PasswordContainer>
-                                    <InputField type={showPassword ? "text" : "password"} value="@Mee251219" readOnly />
-                                    <PasswordToggleButton type="button" onClick={this.togglePassword}>
-                                        {
-                                            showPassword ? (
-                                                <LuEyeOff color="#FFFFFF" size={18} />
-                                            ) : (
-                                                <LuEye color="#FFFFFF" size={18} />
-                                            )
-                                        }
-                                    </PasswordToggleButton>
-                                </PasswordContainer>
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Basic Details</DetailGroupHeading>
                                 <FieldContainer>
                                     <FaUser color="#FFFFFF" size={18} />
-                                    <InputField type="text" placeholder="First name (e.g., John)" />
+                                    <InputField 
+                                        type="text" 
+                                        name="firstName"
+                                        required
+                                        placeholder="First name (e.g., John)"
+                                        onChange={this.handleChange}
+                                    />
                                 </FieldContainer>
                                 <FieldContainer>
                                     <BiSolidTag color="#FFFFFF" size={18} />
-                                    <InputField type="text" placeholder="Last name (e.g., Doe)" />
+                                    <InputField 
+                                        type="text" 
+                                        name="lastName"
+                                        required
+                                        placeholder="Last name (e.g., Doe)"
+                                        onChange={this.handleChange}
+                                    />
                                 </FieldContainer>
                                 <BioContainer>
-                                    <BioTextarea placeholder="Write something about yourself... (keep it short & fun!)"></BioTextarea>
+                                    <BioTextarea 
+                                        name="bio"
+                                        required
+                                        placeholder="Write something about yourself... (keep it short & fun!)"
+                                        onChange={this.handleChange}
+                                    >
+                                    </BioTextarea>
                                     <BioCharCount>0/200</BioCharCount>
                                 </BioContainer>
                             </DetailGroup>
@@ -387,24 +475,55 @@ class CreateProfile extends Component {
                                 <DetailGroupHeading>Profession</DetailGroupHeading>
                                 <FieldContainer>
                                     <FaBriefcase color="#FFFFFF" size={18} />
-                                    <InputField type="text" placeholder="e.g., Software Engineer, Designer..." />
+                                    <InputField 
+                                        type="text" 
+                                        name="profession" 
+                                        required
+                                        placeholder="e.g., Software Engineer, Designer..."
+                                        onChange={this.handleChange}
+                                    />
                                 </FieldContainer>
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Social</DetailGroupHeading>
                                 <FieldContainer>
                                     <FaLink color="#FFFFFF" size={16} />
-                                    <InputField text="text" placeholder="e.g., https://yourwebsite.com" />
+                                    <InputField 
+                                        text="text" 
+                                        name="socialLink" 
+                                        placeholder="e.g., https://yourwebsite.com"
+                                        onChange={this.handleChange}    
+                                    />
                                 </FieldContainer>
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Location</DetailGroupHeading>
                                 <FieldContainer>
                                     <MdLocationPin color="#FFFFFF" size={20} />
-                                    <InputField text="text" placeholder="Where are you from? (e.g., India, Mars)" />
+                                    <InputField 
+                                        text="text" 
+                                        name="location"
+                                        required
+                                        placeholder="Where are you from? (e.g., India, Mars)"
+                                        onChange={this.handleChange}
+                                    />
                                 </FieldContainer>
                             </DetailGroup>
                         </ProfileDetailContainer>
+                        <ProfileActionButtonContainer>
+                            <SkipButton 
+                                type="button"
+                                onClick={this.handleSkipProfile}
+                            >
+                                I'll Do This Later
+                            </SkipButton>
+                            <SaveButton 
+                                type="submit"
+                                onClick={this.handleSave}
+                            >
+                                Save
+                            </SaveButton>
+                        </ProfileActionButtonContainer>
                     </FormContainer>
                 </CardContainer>
             </MainContainer>

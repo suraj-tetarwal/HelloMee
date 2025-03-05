@@ -335,6 +335,7 @@ export const SubmitButton = styled.button`
     @media screen and (min-width: 768px) {
         width: 30%;
         border-radius: 6px;
+        cursor: pointer;
     }
 `
 

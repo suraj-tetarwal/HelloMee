@@ -7,6 +7,10 @@ export const MainContainer = styled.div`
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
+
+    @media screen and (min-width: 768px) {
+        padding: 50px;
+    }
 `
 
 export const CardContainer = styled.div`
@@ -18,15 +22,24 @@ export const CardContainer = styled.div`
     align-items: center;
     padding: 20px;
     box-shadow: 5px 5px 10px #000000;
+
+    @media screen and (min-width: 768px) {
+        border-radius: 10px;
+        padding: 30px;
+    }
 `
 
 export const CreateProfileHeading = styled.h1`
     color: #FFFFFF;
     font-family: Jura;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bolder;
     text-align: center;
     margin-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+        font-size: 32px;
+    }
 `
 
 export const FormContainer = styled.form`
@@ -34,12 +47,17 @@ export const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media screen and (min-width: 768px) {
+        border: 1px solid red;
+    }
 `
 
 export const ProfileImageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid red;
 `
 
 export const ImageContainer = styled.div`
@@ -86,7 +104,7 @@ export const UploadImageButton = styled.button`
 `
 
 export const PopupContainer = styled.div`
-    background-color: #00000050;
+    background-color: #00000080;
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -111,6 +129,13 @@ export const ContentContainer = styled.div`
     padding: 20px;
     margin-top: 20px;
     overflow: auto;
+
+    @media screen and (min-width: 768px) {
+        height: 100%;
+        width: 40%;
+        border-radius: 0;
+        margin-top: 0;
+    }
 `
 
 export const CloseButton = styled.div`
@@ -176,6 +201,10 @@ export const Placeholder = styled.p`
     font-size: 8px;
     font-weight: 600;
     text-align: center;
+
+    @media screen and (min-width: 768px) {
+        font-size: 12px;
+    }
 `
 
 export const PreviewImage = styled.img`
@@ -362,6 +391,10 @@ export const InputField = styled.input`
     border-radius: 6px;
     outline: none;
     padding: 8px;
+
+    @media screen and (min-width: 768px) {
+        height: 50px;
+    }
 `
 
 export const BioContainer = styled.div`
@@ -391,4 +424,43 @@ export const BioCharCount = styled.p`
     font-size: 14px;
     font-weight: 500;
     align-self: flex-start; 
+`
+
+export const ProfileActionButtonContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+`
+
+export const SkipButton = styled.button`
+    min-height: 40px;
+    background-color: #D6D6D6;
+    color: #000000;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    flex-grow: 1;
+`
+
+export const SaveButton = styled.button`
+    min-height: 40px;
+    background-color: #007BFF;
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    flex-grow: 1;
 `

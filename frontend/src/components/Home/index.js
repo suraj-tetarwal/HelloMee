@@ -1,22 +1,21 @@
 import {Component} from 'react'
 
 import Header from '../Header'
-import PostCard from '../PostCard'
+import PostFeed from '../PostFeed'
+import BottomNavbar from '../BottomNavbar'
 
 import {
-    MainContainer,
-    PostsContainer,
+    HomeContainer,
 } from './styledComponents'
 
 class Home extends Component {
     render() {
         return (
-            <MainContainer>
+            <HomeContainer>
                 <Header />
-                <PostsContainer>
-                    <PostCard />
-                </PostsContainer>
-            </MainContainer>
+                <PostFeed />
+                <BottomNavbar />
+            </HomeContainer>
         )
     }
 }
