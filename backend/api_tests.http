@@ -57,5 +57,10 @@ Content-Type: application/json
     "mediaUrl": "https://example.com/image/painting.png"
 }
 
+
+### Search User API
+GET http://localhost:5000/search?query=m
+
+
 ### Test Fetch Posts API 
 GET http://localhost:5000/posts/

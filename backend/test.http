@@ -1,0 +1,3 @@
+### Search User API
+GET http://localhost:5000/search
+Content-Type: application/json

@@ -4,14 +4,15 @@ import styled from 'styled-components'
 export const SearchUserContainer = styled.div`
     display: flex;
     flex-direction: column;
+    height: 100vh;
 `
 
 export const SearchSection = styled.div`
-    height: 100vh;
+    height: 100%;
     padding: 16px;
 `
 
-export const SearchForm = styled.form`
+export const SearchInputContainer = styled.div`
     background-color: rgba(30, 30, 30, 0.5);
     border-radius: 4px;
     height: 40px;
@@ -20,6 +21,7 @@ export const SearchForm = styled.form`
     align-items: center;
     border: 1px solid #BDBDBD;
     padding: 8px;
+    margin-bottom: 16px;
 ` 
 
 export const SearchInput = styled.input`
@@ -36,16 +38,6 @@ export const SearchInput = styled.input`
     flex-grow: 1;
 `
 
-export const SearchButton = styled.button`
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
 export const SearchIcon = styled(IoSearch)`
     color: #E0E0E0;
     font-size: 20px;
@@ -54,15 +46,24 @@ export const SearchIcon = styled(IoSearch)`
 
 export const SearchResultContainer = styled.div`
     height: 100%;
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+`
+
+export const PlaceholderText = styled.p`
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 20px;
+    text-align: center;
+`
+
+export const LoaderContainer = styled.div`
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-`
-
-export const Placeholder = styled.p`
-    color: red;
-    font-family: Jura;
-    font-size: 32px;
-    font-weight: 700;
 `

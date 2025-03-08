@@ -356,3 +356,40 @@ app.get('/posts/', async (request, response) => {
     response.status(200)
     response.send(postsList)
 })
+
+
+// Search User API
+app.get('/search', async (request, response) => {
+    const {query} = request.query
+    console.log(query)
+
+    const userList = await User.aggregate([
+        {
+            $lookup: {
+                from: 'profiles',
+                localField: '_id',
+                foreignField: 'userId',
+                as: 'userDetails'
+            }
+        },
+        {
+            $unwind: '$userDetails'
+        },
+        {
+            $match: {
+                username: {$regex: query}
+            }
+        },
+        {
+            $project: {
+                username: 1,
+                'profileUrl': '$userDetails.profileUrl',
+                'profession': '$userDetails.profession',
+                'location': '$userDetails.location'
+            }
+        }
+    ])
+    
+    response.status(200)
+    response.send(userList)
+})
