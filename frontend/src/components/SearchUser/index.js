@@ -15,11 +15,15 @@ import {
     SearchResultContainer,
     PlaceholderText,
     LoaderContainer,
+    UserCardContainer,
+    FailureResultContainer,
+    RetryButton,
 } from './styledComponents'
 
 const searchStatusConstants = {
     initial: 'INITIAL',
     success: 'SUCCESS',
+    failure: 'FAILURE',
     inProgress: 'IN_PROGRESS',
     noResult: 'NO_RESULT',
 }
@@ -32,7 +36,7 @@ class SearchUser extends Component {
         searchStatus: searchStatusConstants.initial,
     }
 
-    onChangeSeachInput = event => {
+    onChangeSearchInput = event => {
         const searchInput = event.target.value
         const {timer} = this.state
 
@@ -51,7 +55,7 @@ class SearchUser extends Component {
         const trimmedQuery = query.trim()
         const jwtToken = Cookies.get('jwt_token')
 
-        if (trimmedQuery === "" || query === "") {
+        if (trimmedQuery === "") {
             this.setState({usersList: [], searchStatus: searchStatusConstants.initial})
             return
         }
@@ -67,22 +71,19 @@ class SearchUser extends Component {
             }
         }
         const response = await fetch(url, options)
-        const data = await response.json()
-
-        if (data.length === 0) {
-            this.setState({usersList: [], searchStatus: searchStatusConstants.noResult})
-            return
+        if (response.ok) {
+            const data = await response.json()
+            if (data.length === 0) {
+                this.setState({usersList: [], searchStatus: searchStatusConstants.noResult})
+                return
+            } else {
+                this.setState({usersList: data, searchStatus: searchStatusConstants.success})
+            }
+        }
+        else {
+            this.setState({searchStatus: searchStatusConstants.failure})
         }
 
-        this.setState({usersList: data, searchStatus: searchStatusConstants.success})
-    }
-
-    renderLoader = () => {
-        return (
-            <LoaderContainer>
-                <Oval color="#FFFFFF" secondaryColor="#CCCCCC" strokeWidth={5} height="50" width="50" />
-            </LoaderContainer>
-        )
     }
 
     renderInitialView = () => {
@@ -90,6 +91,14 @@ class SearchUser extends Component {
             <SearchResultContainer>
                 <PlaceholderText>Search results will appear here</PlaceholderText>
             </SearchResultContainer>
+        )
+    }
+
+    renderLoader = () => {
+        return (
+            <LoaderContainer>
+                <Oval color="#FFFFFF" secondaryColor="#CCCCCC" strokeWidth={5} height="50" width="50" />
+            </LoaderContainer>
         )
     }
 
@@ -104,16 +113,25 @@ class SearchUser extends Component {
     renderUsersCard = () => {
         const {usersList} = this.state
         return (
-            <ul>
+            <UserCardContainer>
                 {
                     usersList.map((eachUser) => (
                         <UserCard userDetails={eachUser} key={eachUser._id} />
                     ))
                 }
-            </ul>
+            </UserCardContainer>
         )
     }
 
+    renderFailureView = () => {
+        const {query} = this.state
+        return (
+            <FailureResultContainer>
+                <PlaceholderText>Something went wrong. Please try again.</PlaceholderText>
+                <RetryButton type="button" onClick={() => this.fetchUsers(query)}>Try Again</RetryButton>
+            </FailureResultContainer>
+        )
+    }
 
     renderSearchResults = () => {
         const {searchStatus} = this.state
@@ -122,6 +140,8 @@ class SearchUser extends Component {
                 return this.renderLoader()
             case searchStatusConstants.success:
                 return this.renderUsersCard()
+            case searchStatusConstants.failure:
+                return this.renderFailureView()
             case searchStatusConstants.noResult:
                 return this.renderEmptyListView()
             default:
@@ -141,7 +161,7 @@ class SearchUser extends Component {
                             type="search" 
                             value={query}
                             placeholder="Type a username to search"
-                            onChange={this.onChangeSeachInput}
+                            onChange={this.onChangeSearchInput}
                          />
                     </SearchInputContainer>
                     {this.renderSearchResults()}

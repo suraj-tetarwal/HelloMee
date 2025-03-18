@@ -172,10 +172,10 @@ class CreateProfile extends Component {
         const file = event.target.files[0]
         if (file) {
             const reader = new FileReader()
+	    reader.readAsDataURL(file)
             reader.onload = () => {
                 this.setState({previewImage: reader.result})
             }
-            reader.readAsDataURL(file)
         }
     }
 

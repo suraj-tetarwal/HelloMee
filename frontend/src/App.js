@@ -8,6 +8,8 @@ import SignIn from './components/SignIn'
 import CreateProfile from './components/CreateProfile'
 import Home from './components/Home'
 import SearchUser from './components/SearchUser'
+import UserProfile from './components/UserProfile'
+import CreatePost from './components/CreatePost'
 import NotificationFeed from './components/NotificationFeed'
 import NotFound from './components/NotFound'
 
@@ -32,6 +34,8 @@ const App = () => {
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/create-profile" component={CreateProfile} />
         <Route exact path="/search" component={SearchUser} />
+	<Route exact path="/profile/:userId" component={UserProfile} />
+	<Route exact path="/new-post" component={CreatePost} />
         <Route exact path="/notifications" component={NotificationFeed} />
         <ProtectedRoute exact path="/" component={Home} />
         <Route exact component={NotFound} />

@@ -67,3 +67,35 @@ export const LoaderContainer = styled.div`
     justify-content: center;
     align-items: center;
 `
+
+export const UserCardContainer = styled.ul`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+`
+
+export const FailureResultContainer = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+
+export const RetryButton = styled.button`
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 16px;
+`
+

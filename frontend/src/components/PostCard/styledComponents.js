@@ -5,17 +5,18 @@ import { AiOutlineFire, AiOutlineShareAlt } from 'react-icons/ai'
 import styled from 'styled-components'
 
 export const PostContainer = styled.li`
-    background-color: #1A1A1A;
-    border-bottom: 1px solid #DDDDDD;
+    background-color: #000000;
+    border-bottom: 3px solid #808080;
 `
 
 export const PostHeader = styled.div`
-    background-color: #131314;
+    background-color: #000000;
     padding: 12px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #808080;
 `
 
 export const ProfileContainer = styled.div`
@@ -78,7 +79,7 @@ export const CaptionText = styled.p`
 `
 
 export const MediaContainer = styled.div`
-    background-color: #333333;
+    background-color: #1A1A1A;
     height: 60vh;
     width: 100%;
     display: flex;
@@ -95,8 +96,9 @@ export const PlaceholderString = styled.span`
 `
 
 export const PostFooter = styled.div`
-    background-color: #131314;
+    background-color: #000000;
     padding: 12px;
+    border-top: 1px solid #808080;
 `
 
 export const PostActionContainer = styled.div`

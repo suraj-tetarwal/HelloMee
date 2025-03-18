@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
     UserCardItem,
@@ -19,23 +20,25 @@ class UserCard extends Component {
 
     render() {
         const {userDetails} = this.props
-        const {profileUrl, username, profession, location} = userDetails
+        const {_id, profileUrl, username, profession, location} = userDetails
         const randomColor = this.generateRandomColor()
         return (
-            <UserCardItem>
-                {
-                    profileUrl ? null : (
-                        <PlaceholderProfile $bgColor={randomColor}>
-                            <UserIcon />
-                        </PlaceholderProfile>
-                    )
-                }
-                <UserInfoContainer>
-                    <Username>{username}</Username>
-                    <Profession>{profession}</Profession>
-                    <Location>{location}</Location>
-                </UserInfoContainer>
-            </UserCardItem>
+		<Link to={`/profile/${_id}`} style={{textDecoration: 'none'}}>
+			<UserCardItem>
+                		{
+                    			profileUrl ? null : (
+                        		<PlaceholderProfile $bgColor={randomColor}>
+                            			<UserIcon />
+                        		</PlaceholderProfile>
+                    			)
+                		}
+                		<UserInfoContainer>
+                    			<Username>{username}</Username>
+                    			<Profession>{profession}</Profession>
+                    			<Location>{location}</Location>
+                		</UserInfoContainer>
+            		</UserCardItem>
+		</Link>
         )
     }
 }

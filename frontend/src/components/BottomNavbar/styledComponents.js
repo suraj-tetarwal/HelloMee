@@ -1,6 +1,3 @@
-import { BsChatText } from 'react-icons/bs'
-import { GoHome, GoSearch } from 'react-icons/go'
-import { IoNotificationsOutline, IoAddCircleOutline } from 'react-icons/io5'
 import styled from 'styled-components'
 
 export const BottomNavContainer = styled.div`
@@ -10,7 +7,7 @@ export const BottomNavContainer = styled.div`
     width: 100%;
     border-top: 1px solid #BDBDBD;
     backdrop-filter: blur(10px);
-    padding: 16px;
+    padding: 12px;
     z-index: 100;
 `
 
@@ -22,40 +19,17 @@ export const NavList = styled.ul`
     list-style-type: none;
 `
 
-
-
 export const NavButton = styled.button`
     background-color: transparent;
+    color: ${(props) => (props.active === "true" ? "#33A8FF" : "#FFFFFF")};
+    font-size: 30px;
+    font-weight: 900;
     border: none;
     outline: none;
     cursor: pointer;
+    filter: ${(props) => (props.active === "true" ? "drop-shadow(0px 0px 1px #0095F6)" : "drop-shadow(0px 0px 1px #FFFFFF)")}
 `
 
 export const NavItem = styled.li`
     color: #FFFFFF;
-`
-
-export const HomeIcon = styled(GoHome)`
-    color: #FFFFFF;
-    font-size: 32px;
-`
-
-export const SearchIcon = styled(GoSearch)`
-    color: #FFFFFF;
-    font-size: 32px;
-`
-
-export const NewPostIcon = styled(IoAddCircleOutline)`
-    color: #FFFFFF;
-    font-size: 32px;
-`
-
-export const NotificationIcon = styled(IoNotificationsOutline)`
-    color: #FFFFFF;
-    font-size: 32px;
-`
-
-export const ChatIcon = styled(BsChatText)`
-    color: #FFFFFF;
-    font-size: 32px;
 `

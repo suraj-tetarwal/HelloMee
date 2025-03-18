@@ -299,8 +299,9 @@ app.post('/profile/', authenticateToken, async (request, response) => {
 })
 
 // Creating new post
-app.post('/new-post/', authenticateToken, async (request, response) => {
-    const {userId} = request
+app.post('/posts/new/', authenticateToken, async (request, response) => {
+    const {userId, email} = request
+    console.log(email)
     const {caption, mediaUrl} = request.body
 
     const newPost = new Post({
@@ -311,7 +312,7 @@ app.post('/new-post/', authenticateToken, async (request, response) => {
 
     await newPost.save()
     response.status(200)
-    response.send("Post created successfully")
+    response.json({message: "Post created successfully"})
 })
 
 // Fetch all posts
@@ -361,7 +362,6 @@ app.get('/posts/', async (request, response) => {
 // Search User API
 app.get('/search', async (request, response) => {
     const {query} = request.query
-    console.log(query)
 
     const userList = await User.aggregate([
         {
@@ -393,3 +393,82 @@ app.get('/search', async (request, response) => {
     response.status(200)
     response.send(userList)
 })
+
+
+
+/**
+@route GET /profile/:userId/
+@desc Fetch user details and their posts 
+**/
+
+app.get("/profile/:userId", async (request, response) => {
+	const {userId} = request.params
+
+	const userProfileData = await User.aggregate([
+		{$match: {_id: new mongoose.Types.ObjectId(userId)}},
+		{
+			$lookup: {
+				from: 'profiles',
+				localField: '_id',
+				foreignField: 'userId',
+				as: 'profileData',
+			}
+		},
+		{
+			$unwind: '$profileData',
+		},
+		{
+			$lookup: {
+				from: 'posts',
+				localField: '_id',
+				foreignField: 'userId',
+				as: 'posts',
+			}
+		},
+		{
+			$project: {
+				username: 1,
+				accountCreated: 1,
+				'profileUrl': '$profileData.profileUrl',
+				'firstName': '$profileData.firstName',
+				'lastName': '$profileData.lastName',
+				'bio': '$profileData.bio',
+				'profession': '$profileData.profession',
+				'socialUrl': '$profileData.socialLink',
+				'location': '$profileData.location',
+				posts: {$ifNull: ['$posts', []]},
+			}
+		}
+	])
+
+	if (userProfileData.length === 0) {
+		response.status(404)
+		response.json({message: "User not found"})
+		return
+	}
+
+	response.status(200)
+	response.json(userProfileData[0])
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
