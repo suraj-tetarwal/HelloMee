@@ -10,10 +10,11 @@ dotenv.config()
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
-app.use(cors({origin: "*", methods: "GET,POST,PUT,DELETE,OPTIONS"}))
-app.options("*", cors())
+// app.use(cors({origin: "*", methods: "GET,POST,PUT,DELETE,OPTIONS"}))
+// app.options("*", cors())
 
 const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET
 const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY
@@ -452,6 +453,82 @@ app.get("/profile/:userId", async (request, response) => {
 })
 
 
+// Fetch User Profile Details
+app.get("/profile", authenticateToken, async (request, response) => {
+	const {userId} = request
+
+	const profile = await Profile.findOne({userId})
+	response.status(200)
+	response.json({profile})	
+
+})
+
+
+
+// Update User Profile Details
+app.put('/profile/update/', authenticateToken, async (request, response) => {
+	const {userId} = request
+	const {updatedFields} = request.body
+
+	if (!updatedFields.firstName?.trim() || !updatedFields.lastName?.trim() || !updatedFields.bio?.trim()) {
+		response.status(400)
+		response.json({message: "First name, last name, and bio cannot be empty"})
+		return
+	}
+	
+	const result = await Profile.findOneAndUpdate(
+		{userId: userId},
+		{$set: updatedFields},
+		{new: true},
+	)
+
+	if (!result) {
+		response.status(400)
+		response.json({message: "Profile update failed."})
+		return
+	}
+
+	response.status(200)
+	response.json({message: "Profile updated successfully"})
+})
+
+
+
+
+app.post("/chatbot", authenticateToken, async (request, response) => {
+	const {message} = request.body
+
+	if (!message || message.trim() === "") {
+		response.status(400)
+		response.json({error: "Silence is golden, but I can't reply to nothing! Say something!"})
+		return
+	}
+
+	const url = "https://api.together.ai/v1/chat/completions"
+	const options = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${process.env.AI_API_KEY}`,
+		},
+		body: JSON.stringify({
+			model:"mistralai/Mistral-7B-Instruct-v0.2",
+			messages: [{role: "user", content: message}],
+			max_tokens: 100,
+		}),
+	}	
+
+	const aiResponse = await fetch(url, options)
+	
+	if (aiResponse.ok) {
+		const data = await aiResponse.json()
+		response.status(200)
+		response.json({reply: data.choices[0].message.content})
+	} else {
+		response.status(400)
+		response.json({error: "Something went wrong. try again later."})
+	}
+})
 
 
 

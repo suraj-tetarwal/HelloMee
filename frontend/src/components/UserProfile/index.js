@@ -1,6 +1,8 @@
 import { Component } from 'react'
 import Cookies from 'js-cookie'
 import { Oval } from 'react-loader-spinner'
+import { jwtDecode } from 'jwt-decode'
+import { Link } from 'react-router-dom'
 
 import PostCard from '../PostCard'
 
@@ -9,6 +11,7 @@ import {
 	ProfileHeaderContainer,
 	BackButton,
 	BackIcon,
+	HomeButton,
 	LogoText,
 	ProfileDetailsContainer,
 	CoverImageContainer,
@@ -17,8 +20,12 @@ import {
 	ProfileImage,
 	UserIcon,
 	UserInfoContainer,
+	UserInfoTopSection,
+	UserNameSection,
 	FullName,
 	Username,
+	EditProfileButton,
+	FollowUnfollowButton,
 	UserBio,
 	Profession,
 	SocialLink,
@@ -48,6 +55,7 @@ class UserProfile extends Component {
 	state = {
 		profileData: {},
 		apiStatus: apiStatusConstants.inProgress,
+		following: true,
 	}
 
 	componentDidMount = () => {
@@ -104,7 +112,11 @@ class UserProfile extends Component {
 				<BackButton onClick={this.handleBackClick}>
 					<BackIcon />
 				</BackButton>
-				<LogoText>Connecta</LogoText>
+				<Link to="/" style={{textDecoration: "none"}}>
+					<HomeButton type="button">
+						<LogoText>Connecta</LogoText>
+					</HomeButton>
+				</Link>
 			</ProfileHeaderContainer>
 		)
 	}
@@ -115,9 +127,18 @@ class UserProfile extends Component {
 	}
 
 	renderProfileDetails = () => {
-		const {profileData} = this.state
+		const {profileData, following} = this.state
 		const {accountCreated, profileUrl, firstName, lastName, username, bio, profession, socialUrl, location} = profileData
 		const createdAt = this.formatJoinDate(accountCreated)
+
+		const jwtToken = Cookies.get('jwt_token')
+		const decodedData = jwtToken ? jwtDecode(jwtToken) : null
+		
+		const loggedInUserId = decodedData ? decodedData.userId : null
+
+		const {match} = this.props
+		const profileUserId = match.params.userId
+
 		return (
 			<ProfileDetailsContainer>
 				<CoverImageContainer>
@@ -139,8 +160,19 @@ class UserProfile extends Component {
 					</ProfileImageContainer>
 				</CoverImageContainer>
 				<UserInfoContainer>
-					<FullName>{firstName} {lastName}</FullName>
-					<Username>{`@${username}`}</Username>
+					<UserInfoTopSection>
+						<UserNameSection>
+							<FullName>{firstName} {lastName}</FullName>
+							<Username>{`@${username}`}</Username>
+						</UserNameSection>
+						{
+							loggedInUserId === profileUserId ? (
+								<EditProfileButton type="button">Edit</EditProfileButton>
+							) : (
+								<FollowUnfollowButton type="button" follow={following}>{following === true ? "Unfollow" : "Follow"}</FollowUnfollowButton>
+							)
+						}
+					</UserInfoTopSection>
 					<UserBio>{bio}</UserBio>
 					{ profession ? <Profession>{profession}</Profession> : null }
 					{ socialUrl ? <SocialLink href="#">{socialUrl}</SocialLink> : null }

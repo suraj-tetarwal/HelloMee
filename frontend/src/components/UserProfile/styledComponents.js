@@ -38,6 +38,13 @@ export const BackIcon = styled(IoArrowBack)`
 	font-size: 24px;
 `
 
+export const HomeButton = styled.button`
+	background-color: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+`
+
 export const LogoText = styled.p`
 	color: #FFFFFF;
 	font-family: Montez;
@@ -94,6 +101,18 @@ export const UserInfoContainer = styled.div`
 	margin-top: 30px;
 `
 
+export const UserInfoTopSection = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+`
+
+export const UserNameSection = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
 export const FullName = styled.h1`
 	color: #FFFFFF;
 	font-family: Jura;
@@ -108,6 +127,38 @@ export const Username = styled.p`
 	font-size: 18px;
 	font-weight: 500;
 	margin-top: 0;
+`
+
+export const EditProfileButton = styled.button`
+	height: 40px;
+	background-color: transparent;
+	color: #FFFFFF;
+	font-family: Jura;
+	font-size: 14px;
+	font-weight: 600;
+	border: 1px solid #FFFFFF;
+	border-radius: 8px;
+	outline: none;
+	cursor: pointer;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-right: 8px;
+`
+
+export const FollowUnfollowButton = styled.button`
+	height: 40px;
+	background-color: ${(props) => (props.follow ? '#808080' : '#1D9Bf0')};
+	color: #FFFFFF;
+	font-family: Jura;
+	font-size: 14px;
+	font-weight: 600;
+	border: none;
+	border-radius: 8px;
+	outline: none;
+	cursor: pointer;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-right: 8px;
 `
 
 export const UserBio = styled.p`

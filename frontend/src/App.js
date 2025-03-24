@@ -11,6 +11,8 @@ import SearchUser from './components/SearchUser'
 import UserProfile from './components/UserProfile'
 import CreatePost from './components/CreatePost'
 import NotificationFeed from './components/NotificationFeed'
+import EditProfile from './components/EditProfile'
+import AIChatBot from './components/AIChatBot'
 import NotFound from './components/NotFound'
 
 import ProtectedRoute from './components/ProtectedRoute'
@@ -37,6 +39,8 @@ const App = () => {
 	<Route exact path="/profile/:userId" component={UserProfile} />
 	<Route exact path="/new-post" component={CreatePost} />
         <Route exact path="/notifications" component={NotificationFeed} />
+	<Route exact path="/ai-chat" component={AIChatBot} />
+	<Route exact path="/edit-profile" component={EditProfile} />
         <ProtectedRoute exact path="/" component={Home} />
         <Route exact component={NotFound} />
       </Switch>
