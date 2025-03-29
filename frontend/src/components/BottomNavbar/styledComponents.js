@@ -9,6 +9,10 @@ export const BottomNavContainer = styled.div`
     backdrop-filter: blur(10px);
     padding: 12px;
     z-index: 100;
+
+    @media screen and (min-width: 768px) {
+	display: none;
+    }
 `
 
 export const NavList = styled.ul`

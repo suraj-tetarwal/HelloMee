@@ -1,8 +1,10 @@
 import {Component} from 'react'
 
+import LeftSidebar from '../LeftSidebar'
 import Header from '../Header'
 import PostFeed from '../PostFeed'
 import BottomNavbar from '../BottomNavbar'
+import AIChatBot from '../AIChatBot'
 
 import {
     HomeContainer,
@@ -13,7 +15,9 @@ class Home extends Component {
         return (
             <HomeContainer>
                 <Header />
+		<LeftSidebar />
                 <PostFeed />
+		<AIChatBot />
                 <BottomNavbar />
             </HomeContainer>
         )

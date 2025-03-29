@@ -83,6 +83,9 @@ const ProfileSchema = new mongoose.Schema({
         required: true, 
         trim: true
     },
+    bookmark: [{type: mongoose.Schema.Types.ObjectId, ref: "Post", default: []}],
+    follower: [{type: mongoose.Schema.Types.ObjectId, ref: "User", default: []}],
+    following: [{type: mongoose.Schema.Types.ObjectId, ref: "User", default: []}],
 })
 
 // Post Schema
@@ -101,6 +104,7 @@ const PostSchema = new mongoose.Schema({
         type: String,
         default: null,
     },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: []}],
     likesCount: {
         type: Number,
         default: 0,
@@ -115,6 +119,29 @@ const PostSchema = new mongoose.Schema({
     }
 })
 
+// Comment Schema
+const CommentSchema = new mongoose.Schema({
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
+	postId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Post",
+		required: true,
+	},
+	text: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	}
+})
+
 // User Model
 const User = mongoose.model('User', userSchema)
 
@@ -123,6 +150,9 @@ const Profile = mongoose.model('Profile', ProfileSchema)
 
 // Post Model
 const Post = mongoose.model('Post', PostSchema)
+
+// Comment Model
+const Comment = mongoose.model('Comment', CommentSchema)
 
 // database connection variable
 let connection = null
@@ -346,6 +376,7 @@ app.get('/posts/', async (request, response) => {
                 _id: 1,
                 caption: 1,
                 mediaUrl: 1,
+		likes: 1,
                 likesCount: 1,
                 commentsCount: 1,
                 createdAt: 1,
@@ -357,6 +388,128 @@ app.get('/posts/', async (request, response) => {
     
     response.status(200)
     response.send(postsList)
+})
+
+app.put('/posts/:postId/like', async (request, response) => {
+	const {postId} = request.params
+	const {userId} = request.body
+
+	const result = await Post.updateOne(
+		{_id: postId},
+		[
+			{
+				$set: {
+					likes: {
+						$cond: {
+							if: {$in: [userId, "$likes"]},
+							then: {$setDifference: ["$likes", [userId]]},
+							else: {$concatArrays: ["$likes", [userId]]},
+						}
+					}
+				}
+			},
+			{ $set: {likesCount: {$size: "$likes"}}}
+		]
+	)	
+
+	response.status(204).end()
+})
+
+app.post('/posts/:postId/comment', authenticateToken, async (request, response) => {
+	const {postId} = request.params
+	const {userId} = request
+	const {text} = request.body
+
+	const newComment = new Comment({userId, postId, text})
+
+	await newComment.save()
+
+	response.status(200)
+	response.json({message: "Your comment has been posted"})
+
+})
+
+
+app.get('/posts/:postId/comment', authenticateToken, async (request, response) => {
+	const {postId} = request.params
+	
+	const comments = await Comment.aggregate([
+		{$match: {postId: new mongoose.Types.ObjectId(postId)}},
+		{
+			$lookup: {
+				from: "users",
+				localField: "userId",
+				foreignField: "_id",
+				as: "user",
+			}
+		},
+		{$unwind: "$user"},
+		{
+			$lookup: {
+				from: 'profiles',
+				localField: 'userId',
+				foreignField: 'userId',
+				as: 'profileData',
+			}
+		},
+		{$unwind: "$profileData"},
+		{
+			$project: {
+				_id: 1,
+				text: 1,
+				createdAt: 1,
+				username: "$user.username",
+				profileUrl: "$profileData.profileUrl",
+			}
+		}
+	])
+	
+	response.status(200)
+	response.json({comments})
+})
+
+
+
+app.get('/profiles/:userId/bookmarks/', authenticateToken, async (request, response) => {
+	const {userId} = request.params
+	
+	const result = await Profile.findOne({userId}, {bookmark: 1})
+
+	if (!result) {
+		response.status(404)
+		response.json({error: "Profile not found"})
+		return
+	}
+
+	response.status(200)
+	response.json({result})	
+
+})
+
+
+app.put('/profiles/:userId/bookmarks', authenticateToken, async (request, response) => {
+	const {userId} = request.params
+	const {postId} = request.body
+
+	const result = await Profile.updateOne(
+		{userId},
+		[
+			{
+				$set: {
+					bookmark: {
+						$cond: {
+							if: {$in: [postId, "$bookmark"]},
+							then: {$setDifference: ["$bookmark", [postId]]},
+							else: {$concatArrays: ["$bookmark", [postId]]},
+						}
+					}
+				}
+			}
+		]
+	)	
+
+	response.status(204).end()
+
 })
 
 
@@ -495,7 +648,7 @@ app.put('/profile/update/', authenticateToken, async (request, response) => {
 
 
 
-app.post("/chatbot", authenticateToken, async (request, response) => {
+app.post("/chatbot", authenticateToken, async (request, response) => {	
 	const {message} = request.body
 
 	if (!message || message.trim() === "") {

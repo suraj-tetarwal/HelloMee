@@ -1,12 +1,14 @@
+import styled from 'styled-components'
+
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaUser } from 'react-icons/fa'
-import { IoChatbubbleOutline, IoBookmarkOutline } from 'react-icons/io5'
-import { AiOutlineFire, AiOutlineShareAlt } from 'react-icons/ai'
-import styled from 'styled-components'
+import { IoChatbubbleOutline, IoBookmark, IoBookmarkOutline } from 'react-icons/io5'
+import { AiFillFire, AiOutlineFire, AiOutlineShareAlt } from 'react-icons/ai'
+import { BiSolidSend } from 'react-icons/bi'
 
 export const PostContainer = styled.li`
     background-color: #000000;
-    border-bottom: 3px solid #808080;
+    border-bottom: 5px solid #0A0A0A;
 `
 
 export const PostHeader = styled.div`
@@ -16,7 +18,7 @@ export const PostHeader = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #808080;
+    border-bottom: 1px solid #1A1A1A;
 `
 
 export const ProfileContainer = styled.div`
@@ -88,17 +90,16 @@ export const MediaContainer = styled.div`
     border-radius: 8px;
 `
 
-export const PlaceholderString = styled.span`
-    color: #EEEEEE;
-    font-family: Jura;
-    font-size: 12px;
-    font-weight: 500;
+export const Media = styled.img`
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
 `
 
 export const PostFooter = styled.div`
     background-color: #000000;
     padding: 12px;
-    border-top: 1px solid #808080;
+    border-top: 1px solid #1A1A1A;
 `
 
 export const PostActionContainer = styled.div`
@@ -115,26 +116,42 @@ export const LikeCommentIconContainer = styled.div`
     align-items: center;
 `
 
-export const LikeIcon = styled(AiOutlineFire)`
-    color: #FFFFFF;
-    font-size: 24px;
+export const ActionButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
     margin-right: 16px;
+`
+
+export const NonActiveLikeIcon = styled(AiOutlineFire)`
+    color: #FFFFFF;
+    font-size: 26px;
+`
+
+export const ActiveLikeIcon = styled(AiFillFire)`
+    color: #FF0000;
+    font-size: 26px;
 `
 
 export const CommentIcon = styled(IoChatbubbleOutline)`
     color: #FFFFFF;
-    font-size: 24px;
-    margin-right: 16px;
+    font-size: 26px;
 `
 
 export const ShareIcon = styled(AiOutlineShareAlt)`
     color: #FFFFFF;
-    font-size: 24px;
+    font-size: 26px;
 `
 
-export const BookmarkIcon = styled(IoBookmarkOutline)`
+export const NonActiveBookmarkIcon = styled(IoBookmarkOutline)`
     color: #FFFFFF;
-    font-size: 24px;
+    font-size: 26px;
+`
+
+export const ActiveBookmarkIcon = styled(IoBookmark)`
+    color: #007BFF;
+    font-size: 26px;
 `
 
 export const PostMetaContainer = styled.div`
@@ -150,4 +167,93 @@ export const PostMetaText = styled.span`
     font-family: Jura;
     font-size: 16px;
     font-weight: 500
+`
+
+export const CommentsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+`
+
+export const CommentFormContainer = styled.form`
+    background-color: #0A0A0A;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 8px;
+`
+
+export const CommentInput = styled.textarea`
+    background-color: #0A0A0A;
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+`
+
+export const CommentSubmitButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+`
+
+export const SendIcon = styled(BiSolidSend)`
+    color: #FFFFFF;
+    font-size: 26px;
+`
+
+export const CommentsListContainer = styled.ul`
+    background-color: #0A0A0A;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    overflow-y: auto;
+    padding: 8px;
+`
+
+export const CommentItemContainer = styled.li`
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 12px;
+`
+
+export const CommentInfoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+export const CommentMetaDataContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+
+export const CommentUsername = styled.p`
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 16px;
+`
+
+export const CommentTime = styled.p`
+    color: #808080;
+    font-family: Jura;
+    font-size: 14px;
+    font-weight: 600;
+`
+
+export const CommentText = styled.p`
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 600;
 `

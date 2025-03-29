@@ -31,8 +31,13 @@ import {
     FormText,
     DesktopAuthButtonContainer,
     DesktopAuthButton,
+    GoogleIcon,
+    FacebookIcon,
+    LinkedinIcon,
     FieldContainer,
     InputBox,
+    EmailIcon,
+    PasswordIcon,
     ShowPasswordContainer,
     LabelText,
     CheckBox,
@@ -63,19 +68,19 @@ class SignIn extends Component {
         this.setState({password: event.target.value})
     }
 
-    // checkProfileExists = async (jwtToken) => {
-    //     const url = "http://localhost:5000/profile/status/"
-    //     const options = {
-    //         method: "GET",
-    //         headers: {
-    //             "Authorization": `Bearer ${jwtToken}`
-    //         }
-    //     }
-    //     const response = await fetch(url, options)
-    //     const data = await response.json()
-    //     const {profile_exist} = data
-    //     return profile_exist
-    // }
+    checkProfileExists = async (jwtToken) => {
+        const url = "http://localhost:5000/profile/status/"
+        const options = {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${jwtToken}`
+            }
+        }
+        const response = await fetch(url, options)
+        const data = await response.json()
+        const {profile_exist} = data
+	return profile_exist
+    }
 
     onSubmitForm = async (event) => {
         event.preventDefault()
@@ -88,7 +93,7 @@ class SignIn extends Component {
             password,
         }
 
-        const url = "http://172.20.10.2:5000/sign-in/"
+        const url = "http://localhost:5000/sign-in/"
         const options = {
             method: "POST",
             headers: {
@@ -106,28 +111,27 @@ class SignIn extends Component {
                 render: "Welcome! Taking you to home...",
                 type: "success",
                 isLoading: false,
-                autoClose: 5000
+                autoClose: 3000
             })
-            history.replace("/")
-            // const isProfileExists = await this.checkProfileExists(jwtToken)
-            // if (isProfileExists) {
-            //     toast.update(toastId, {
-            //         render: "Welcome back! Taking you to home...",
-            //         type: "success",
-            //         isLoading: false,
-            //         autoClose: 5000
-            //     })
-            //     history.replace("/")
-            // }
-            // else {
-            //     toast.update(toastId, {
-            //         render: "Almost there! Let's set up your profile",
-            //         type: "info",
-            //         isLoading: false,
-            //         autoClose: 5000
-            //     })
-            //     history.replace("/create-profile")
-            // }
+            const isProfileExists = await this.checkProfileExists(jwtToken)
+            if (isProfileExists) {
+                toast.update(toastId, {
+                    render: "Welcome back! Taking you to home...",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 3000
+                })
+                history.replace("/")
+            }
+            else {
+                toast.update(toastId, {
+                    render: "Almost there! Let's set up your profile",
+                    type: "info",
+                    isLoading: false,
+                    autoClose: 3000
+                })
+                history.replace("/create-profile")
+            }
         } else {
             const {message} = data
             toast.update(toastId, {
@@ -160,19 +164,19 @@ class SignIn extends Component {
                         <FormHeading>Sign in to HelloMee</FormHeading>
                         <DesktopAuthButtonContainer>
                             <DesktopAuthButton type="button">
-                                <FaGoogle color="#DB35CC" size="20px" />
+                                <GoogleIcon />
                             </DesktopAuthButton>
                             <DesktopAuthButton type="button">
-                                <FaFacebookF color="#DB35CC" size="20px" />
+                                <FacebookIcon />
                             </DesktopAuthButton>
                             <DesktopAuthButton type="button">
-                                <FaLinkedinIn color="#DB35CC" size="20px" />
+                                <LinkedinIcon />
                             </DesktopAuthButton>
                         </DesktopAuthButtonContainer>
                         <FormText>or use your email to login</FormText>
                         <Form onSubmit={this.onSubmitForm}>
                             <FieldContainer>
-                                <HiOutlineMail color="#DB35CC" size="30px" />
+                                <EmailIcon />
                                 <InputBox 
                                     type="email" 
                                     placeholder="Email" 
@@ -182,7 +186,7 @@ class SignIn extends Component {
                                 /> 
                             </FieldContainer>
                             <FieldContainer>
-                                <MdOutlineLock color="#DB35CC" size="30px" />
+                                <PasswordIcon />
                                 <InputBox 
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Password"
@@ -209,7 +213,7 @@ class SignIn extends Component {
                     </FormContainer>
                     <DesktopContainer>
                         <DesktopContainerHeading>Hello, Friend!</DesktopContainerHeading>
-                        <DesktopContainerText>Enter your personal details <br/> and start journey with us</DesktopContainerText>
+                        <DesktopContainerText>Enter your account details <br/> and start journey with us</DesktopContainerText>
                         <SignInButton type="button">SIGN UP</SignInButton>
                     </DesktopContainer>
                     <FooterContainer>

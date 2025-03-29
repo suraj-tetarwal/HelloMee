@@ -35,13 +35,13 @@ const App = () => {
         <Route exact path="/sign-up" component={SignUp} />
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/create-profile" component={CreateProfile} />
+	<Route exact path="/" component={Home} />
         <Route exact path="/search" component={SearchUser} />
 	<Route exact path="/profile/:userId" component={UserProfile} />
 	<Route exact path="/new-post" component={CreatePost} />
         <Route exact path="/notifications" component={NotificationFeed} />
 	<Route exact path="/ai-chat" component={AIChatBot} />
 	<Route exact path="/edit-profile" component={EditProfile} />
-        <ProtectedRoute exact path="/" component={Home} />
         <Route exact component={NotFound} />
       </Switch>
     </BrowserRouter>

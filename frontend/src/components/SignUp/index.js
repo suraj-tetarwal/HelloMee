@@ -1,15 +1,12 @@
 import { Component } from 'react'
 import { toast } from 'react-toastify'
 
-import { AiOutlineUser } from "react-icons/ai"
-import { HiOutlineMail } from "react-icons/hi"
-import { MdOutlineLock } from "react-icons/md"
+import Divider from '../Divider'
+
 import { FaGoogle } from "react-icons/fa6"
 import { FaFacebookF } from "react-icons/fa6"
 import { FaLinkedinIn } from "react-icons/fa6"
 import { GoTriangleRight } from "react-icons/go"
-
-import Divider from '../Divider'
 
 import {
     MainContainer,
@@ -31,8 +28,14 @@ import {
     FormText,
     DesktopAuthButtonContainer,
     DesktopAuthButton,
+    GoogleIcon,
+    FacebookIcon,
+    LinkedinIcon,
     FieldContainer,
     InputBox,
+    UserIcon,
+    EmailIcon,
+    PasswordIcon,
     ShowPasswordContainer,
     LabelText,
     CheckBox,
@@ -127,26 +130,26 @@ class SignUp extends Component {
                     </MobileViewContainer>
                     <DesktopContainer>
                         <DesktopContainerHeading>Welcome Back!</DesktopContainerHeading>
-                        <DesktopContainerText>To keep connected with us please login <br/> with your personal info</DesktopContainerText>
+                        <DesktopContainerText>To keep connected with us please login <br/> with your account details.</DesktopContainerText>
                         <SignInButton type="button">SIGN IN</SignInButton>
                     </DesktopContainer>
                     <FormContainer>
                         <FormHeading>Create Account</FormHeading>
                         <DesktopAuthButtonContainer>
                             <DesktopAuthButton type="button">
-                                <FaGoogle color="#DB35CC" size="20px" />
+                                <GoogleIcon />
                             </DesktopAuthButton>
                             <DesktopAuthButton type="button">
-                                <FaFacebookF color="#DB35CC" size="20px" />
+                                <FacebookIcon />
                             </DesktopAuthButton>
                             <DesktopAuthButton type="button">
-                                <FaLinkedinIn color="#DB35CC" size="20px" />
+                                <LinkedinIcon />
                             </DesktopAuthButton>
                         </DesktopAuthButtonContainer>
                         <FormText>or use your email for registration</FormText>
                         <Form onSubmit={this.onSubmitForm}>
                             <FieldContainer>
-                                <AiOutlineUser color="#DB35CC" size="30px" />
+                                <UserIcon />
                                 <InputBox 
                                     type="text"
                                     placeholder="Username"
@@ -156,7 +159,7 @@ class SignUp extends Component {
                                 />
                             </FieldContainer>
                             <FieldContainer>
-                                <HiOutlineMail color="#DB35CC" size="30px" />
+                                <EmailIcon />
                                 <InputBox 
                                     type="email"
                                     placeholder="Email"
@@ -166,7 +169,7 @@ class SignUp extends Component {
                                 />
                             </FieldContainer>
                             <FieldContainer>
-                                <MdOutlineLock color="#DB35CC" size="30px" />
+                                <PasswordIcon />
                                 <InputBox 
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Password"

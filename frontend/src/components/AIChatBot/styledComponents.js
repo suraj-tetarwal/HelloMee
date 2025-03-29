@@ -51,20 +51,29 @@ export const ContentContainer = styled.div`
 	flex-direction: column;
 `
 
-export const MessageContainer = styled.ul`
+export const MessageContainer = styled.div`
+	position: relative;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
+`
+
+export const MessagesList = styled.ul`
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+	padding: 12px;
 	overflow-y: auto;
-	padding: 8px;
 `
 
 export const PlaceholderText = styled.p`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	color: #BDBDBD;
 	font-family: Jura;
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: 600;
 	text-align: center;
 `

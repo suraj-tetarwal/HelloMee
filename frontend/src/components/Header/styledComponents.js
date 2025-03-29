@@ -13,6 +13,10 @@ export const HeaderContainer = styled.div`
     padding: 12px;
     border-bottom: 0.5px solid #BDBDBD;
     backdrop-filter: blur(10px);
+
+    @media screen and (min-width: 768px) {
+	display: none;
+    }
 `
 
 export const UserProfile = styled.div`

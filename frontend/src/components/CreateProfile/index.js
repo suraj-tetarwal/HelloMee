@@ -41,16 +41,21 @@ import {
     ButtonContainer,
     ActionButtonContainer,
     CropButton,
+    CropIcon,
     DoneButton,
     ResetButton,
+    ResetIcon,
     ProfileDetailContainer,
     DetailGroup,
     DetailGroupHeading,
     InfoText,
     Label,
     Value,
-    FieldContainer,
     InputField,
+    UserIcon,
+    BriefCaseIcon,
+    LinkIcon,
+    LocationIcon,
     BioContainer,
     BioTextarea,
     BioCharCount,
@@ -73,7 +78,7 @@ class CreateProfile extends Component {
         croppedImage: null,
         publicId: null,
         uploadStatus: uploadStatusConstants.initial,
-        username: 'your_username',
+        username: '',
         email: '',
         firstName: '',
         lastName: '',
@@ -413,10 +418,10 @@ class CreateProfile extends Component {
                                             <ButtonContainer>
                                                 <ActionButtonContainer>
                                                     <CropButton type="button" onClick={this.handleCrop}>
-                                                        <IoCrop color="#FFFFFF" size={20} />
+                                                        <CropIcon />
                                                     </CropButton>
                                                     <ResetButton type="button" onClick={this.handleReset}>
-                                                        <IoRefresh color="#FFFFFF" size={20} />
+                                                        <ResetIcon />
                                                     </ResetButton>
                                                 </ActionButtonContainer>
                                                 <DoneButton type="button" onClick={() => this.handleDone(close)}>Done</DoneButton>
@@ -440,8 +445,6 @@ class CreateProfile extends Component {
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Basic Details</DetailGroupHeading>
-                                <FieldContainer>
-                                    <FaUser color="#FFFFFF" size={18} />
                                     <InputField 
                                         type="text" 
                                         name="firstName"
@@ -449,9 +452,6 @@ class CreateProfile extends Component {
                                         placeholder="First name (e.g., John)"
                                         onChange={this.handleChange}
                                     />
-                                </FieldContainer>
-                                <FieldContainer>
-                                    <BiSolidTag color="#FFFFFF" size={18} />
                                     <InputField 
                                         type="text" 
                                         name="lastName"
@@ -459,7 +459,6 @@ class CreateProfile extends Component {
                                         placeholder="Last name (e.g., Doe)"
                                         onChange={this.handleChange}
                                     />
-                                </FieldContainer>
                                 <BioContainer>
                                     <BioTextarea 
                                         name="bio"
@@ -473,8 +472,6 @@ class CreateProfile extends Component {
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Profession</DetailGroupHeading>
-                                <FieldContainer>
-                                    <FaBriefcase color="#FFFFFF" size={18} />
                                     <InputField 
                                         type="text" 
                                         name="profession" 
@@ -482,24 +479,18 @@ class CreateProfile extends Component {
                                         placeholder="e.g., Software Engineer, Designer..."
                                         onChange={this.handleChange}
                                     />
-                                </FieldContainer>
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Social</DetailGroupHeading>
-                                <FieldContainer>
-                                    <FaLink color="#FFFFFF" size={16} />
                                     <InputField 
                                         text="text" 
                                         name="socialLink" 
                                         placeholder="e.g., https://yourwebsite.com"
                                         onChange={this.handleChange}    
                                     />
-                                </FieldContainer>
                             </DetailGroup>
                             <DetailGroup>
                                 <DetailGroupHeading>Location</DetailGroupHeading>
-                                <FieldContainer>
-                                    <MdLocationPin color="#FFFFFF" size={20} />
                                     <InputField 
                                         text="text" 
                                         name="location"
@@ -507,7 +498,6 @@ class CreateProfile extends Component {
                                         placeholder="Where are you from? (e.g., India, Mars)"
                                         onChange={this.handleChange}
                                     />
-                                </FieldContainer>
                             </DetailGroup>
                         </ProfileDetailContainer>
                         <ProfileActionButtonContainer>

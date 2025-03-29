@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Cookies from 'js-cookie'
 import { v4 as uuidv4 } from 'uuid'
+import { toast } from 'react-toastify'
 
 import MessageItem from '../MessageItem'
 
@@ -12,6 +13,7 @@ import {
 	Logo,
 	ContentContainer,
 	MessageContainer,
+	MessagesList,
 	PlaceholderText,
 	FormContainer,
 	MessageBox,
@@ -31,12 +33,12 @@ class AIChatBot extends Component {
 	handleSendMessage = async (event) => {
 		event.preventDefault()
 	
-		const {messages, userInput} = this.state
+		const {userInput} = this.state
 
 		const trimmedText = userInput.trim()
 
 		if (trimmedText === "") {
-			console.log("Nothing is there in input box")
+			toast.error("Silence is golden, but I can't reply to nothing! Say something!")
 			return
 		}
 
@@ -76,22 +78,31 @@ class AIChatBot extends Component {
 			const {reply} = data
 			this.setState((prevState) => ({
 				messages: prevState.messages.map((msg) => 
-					msg.text === "Thinking..." ? {id: uuidv4, text: reply, sender: "AI"} : msg
+					msg.text === "Thinking..." ? {id: uuidv4(), text: reply, sender: "AI"} : msg
 				)
 			}))
+		} else {
+			const {error} = data
+			toast.error(error)
 		}	
-		
 	}
 
 	renderMessages = () => {
 		const {messages} = this.state
-		console.log(messages)
 		return (
 			<MessageContainer>
 				{
 					messages.length === 0 ? (
 						<PlaceholderText>Hey there! How can I assist you today?</PlaceholderText>
-					) : null
+					) : (
+						<MessagesList>
+							{
+								messages.map((eachMessage) => (
+									<MessageItem key={eachMessage.id} messageInfo={eachMessage} />
+								))
+							}
+						</MessagesList>
+					)
 				}
 			</MessageContainer>
 		)

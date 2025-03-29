@@ -1,5 +1,8 @@
 import { Component } from 'react'
 import { Oval } from 'react-loader-spinner'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
+import {toast} from 'react-toastify'
 
 import PostCard from '../PostCard'
 
@@ -21,11 +24,13 @@ const apiStatusConstants = {
 class PostFeed extends Component {
     state = {
         postList: [],
+	bookmark: [],
 	apiStatus: apiStatusConstants.inProgress,
     }
 
     componentDidMount() {
         this.fetchPost()
+	this.fetchBookmarks()
     }
 
     fetchPost = async () => {
@@ -44,6 +49,58 @@ class PostFeed extends Component {
         }
     }
 
+    fetchBookmarks = async () => {
+	const jwtToken = Cookies.get('jwt_token')
+	const decoded = jwtDecode(jwtToken)
+	const {userId} = decoded
+	
+	const url = `http://localhost:5000/profiles/${userId}/bookmarks`
+	const options = {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${jwtToken}`,
+		},
+	}
+
+	const response = await fetch(url, options)
+	const data = await response.json()
+
+	if (response.ok) {
+		const {bookmark} = data.result
+		this.setState({bookmark})
+	}
+	else {
+		const {error} = data
+		toast.error(error)
+	}
+    }
+
+    toggleBookmark = async (postId) => {
+	this.setState((prevState) => ({
+		bookmark: prevState.bookmark.includes(postId) ?
+		prevState.bookmark.filter(id => id !== postId) : 
+		[...prevState.bookmark, postId]
+	}), () => this.updateBookmarkInDatabase(postId))
+    }
+
+    updateBookmarkInDatabase = async (postId) => {
+	const jwtToken = Cookies.get('jwt_token')
+	const decoded = jwtDecode(jwtToken)
+	const {userId} = decoded
+
+	const url = `http://localhost:5000/profiles/${userId}/bookmarks/`
+	const options = {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${jwtToken}`,
+		},
+		body: JSON.stringify({postId})
+	}
+
+	await fetch(url, options)
+    }
+
     renderLoader = () => {
 	return (
 		<LoaderContainer>
@@ -59,12 +116,17 @@ class PostFeed extends Component {
     }
 
     renderPostsView = () => {
-	const {postList} = this.state
+	const {postList, bookmark} = this.state
 	return (
 	    <PostListContainer>
 		{
 		    postList.map(eachPost => (
-			<PostCard key={eachPost._id} postDetails={eachPost} />
+			<PostCard
+				key={eachPost._id}
+				postDetails={eachPost}
+				isBookmarked={bookmark.includes(eachPost._id)}
+				onBookmarkToggle={this.toggleBookmark}
+			/>
 		    ))
 		}
 	    </PostListContainer>
