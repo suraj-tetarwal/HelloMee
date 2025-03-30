@@ -5,11 +5,20 @@ export const SearchUserContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
+
+    @media screen and (min-width: 768px) {
+	flex-direction: row;
+    }
 `
 
 export const SearchSection = styled.div`
     height: 100%;
     padding: 16px;
+
+    @media screen and (min-width: 768px) {
+	width: 50%;
+	padding: 32px;
+    }
 `
 
 export const SearchInputContainer = styled.div`
@@ -22,6 +31,10 @@ export const SearchInputContainer = styled.div`
     border: 1px solid #BDBDBD;
     padding: 8px;
     margin-bottom: 16px;
+
+    @media screen and (min-width: 768px) {
+	height: 60px;
+    }
 ` 
 
 export const SearchInput = styled.input`

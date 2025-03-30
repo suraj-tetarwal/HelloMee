@@ -5,12 +5,21 @@ import styled from 'styled-components'
 export const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
+
+	@media screen and (min-width: 768px) {
+		flex-direction: row;
+	}
 `
 
 export const CreatePostContainer = styled.div`
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	padding: 16px;
+
+	@media screen and (min-width: 768px) {
+		padding: 32px;
+	}
 `
 
 export const CreatePostHeading = styled.div`

@@ -8,6 +8,12 @@ export const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow: auto;
+
+	@media screen and (min-width: 768px) {
+		width: 40%;
+		flex-grow: 1;
+		border-left: 1px solid #808080;
+	}
 `
 
 export const HeaderContainer = styled.div`
@@ -23,6 +29,10 @@ export const HeaderContainer = styled.div`
 	border-bottom: 1px solid #BDBDBD;
 	backdrop-filter: blur(10px);
 	z-index: 1;
+
+	@media screen and (min-width: 768px) {
+		display: none;
+	}
 `
 
 export const ActionButton = styled.button`
@@ -92,6 +102,7 @@ export const FormContainer = styled.form`
 
 export const MessageBox = styled.textarea`
 	background-color: transparent;
+	height: 100px;
 	color: #BDBDBD;
 	font-family: Roboto;
 	font-size: 18px;

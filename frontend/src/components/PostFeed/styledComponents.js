@@ -1,12 +1,24 @@
 import {styled} from 'styled-components'
 
 export const PostFeedContainer = styled.div`
+    width: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+
+    @media screen and (min-width: 768px) {
+	min-width: 40%;
+	flex-grow: 1; 
+    }
 `
 
 export const PostListContainer = styled.ul`
+    height: 100%;
     list-style-type: none;
+    
+    @media screen and (min-width: 768px) {
+	overflow: auto;
+    }
 `
 
 export const LoaderContainer = styled.div`

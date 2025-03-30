@@ -5,6 +5,8 @@ import { Oval } from 'react-loader-spinner'
 import Header from '../Header'
 import BottomNavbar from '../BottomNavbar'
 import UserCard from '../UserCard'
+import LeftSidebar from '../LeftSidebar'
+import AIChatBot from '../AIChatBot'
 
 import {
     SearchUserContainer,
@@ -153,6 +155,7 @@ class SearchUser extends Component {
         const {query} = this.state 
         return (
             <SearchUserContainer>
+		<LeftSidebar />
                 <Header />
                 <SearchSection>
                     <SearchInputContainer>
@@ -166,6 +169,7 @@ class SearchUser extends Component {
                     </SearchInputContainer>
                     {this.renderSearchResults()}
                 </SearchSection>
+		<AIChatBot />
                 <BottomNavbar />
             </SearchUserContainer>
         )

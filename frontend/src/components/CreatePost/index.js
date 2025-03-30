@@ -5,6 +5,8 @@ import Cookies from 'js-cookie'
 
 import Header from '../Header'
 import BottomNavbar from '../BottomNavbar'
+import LeftSidebar from '../LeftSidebar'
+import AIChatBot from '../AIChatBot'
 
 import 'cropperjs/dist/cropper.css'
 
@@ -194,6 +196,7 @@ class CreatePost extends Component {
 		return (
 			<MainContainer>
 				<Header />
+				<LeftSidebar />
 				<CreatePostContainer>
 					<CreatePostHeading>Create Post</CreatePostHeading>
 					<MediaActionsContainer>
@@ -268,6 +271,7 @@ class CreatePost extends Component {
 					</PostActionButtonContainer>
 				</CreatePostContainer>
 				<BottomNavbar />
+				<AIChatBot />
 			</MainContainer>
 		)
 	}
