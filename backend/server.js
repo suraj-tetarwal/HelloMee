@@ -670,9 +670,7 @@ app.post("/chatbot", authenticateToken, async (request, response) => {
 			max_tokens: 100,
 		}),
 	}	
-
 	const aiResponse = await fetch(url, options)
-	
 	if (aiResponse.ok) {
 		const data = await aiResponse.json()
 		response.status(200)
@@ -682,6 +680,8 @@ app.post("/chatbot", authenticateToken, async (request, response) => {
 		response.json({error: "Something went wrong. try again later."})
 	}
 })
+
+
 
 
 

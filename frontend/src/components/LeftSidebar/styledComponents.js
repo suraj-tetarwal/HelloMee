@@ -34,7 +34,7 @@ export const TopContainer = styled.div`
 	flex-grow: 1;
 `
 
-export const SidebarMenuContainer = styled.div`
+export const SidebarMenuContainer = styled.ul`
 	display: flex;
 	flex-direction: column;
 	margin-top: 16px;
@@ -70,13 +70,24 @@ export const SettingIcon = styled(IoSettingsSharp)`
 	font-size: 20px;
 `
 
-export const SidebarItemContainer = styled.div`
+export const ActionButton = styled.button`
+	width: 100%;
+	background: ${(props) => (props.active === "true" ? "linear-gradient(#007BFF, #0056B3)" : "#000000")};
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	outline: none;
+	border: none;
+	cursor: pointer;
 	border-radius: 8px;
 	padding: 8px;
 	margin-bottom: 8px;
+`
+
+export const SidebarItemContainer = styled.li`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 `
 
 export const Active = styled.div`
