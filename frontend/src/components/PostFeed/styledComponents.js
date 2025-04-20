@@ -1,14 +1,12 @@
 import {styled} from 'styled-components'
 
 export const PostFeedContainer = styled.div`
-    width: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 
     @media screen and (min-width: 768px) {
-	min-width: 40%;
-	flex-grow: 1; 
+	width: 45%;
     }
 `
 

@@ -22,6 +22,11 @@ export const CardContainer = styled.div`
     align-items: center;
     padding: 20px;
     box-shadow: 5px 5px 10px #000000;
+
+    @media screen and (min-width: 768px) {
+	width: 50%;
+	padding: 40px;
+    }
 `
 
 export const CreateProfileHeading = styled.h1`
@@ -31,6 +36,10 @@ export const CreateProfileHeading = styled.h1`
     font-weight: bolder;
     text-align: center;
     margin-bottom: 16px;
+
+    @media screen and (min-width: 768px) {
+	font-size: 36px;
+    }
 `
 
 export const FormContainer = styled.form`
@@ -105,7 +114,7 @@ export const PopupContainer = styled.div`
 `
 
 export const ContentContainer = styled.div`
-    background-color: #1A1A1A;
+    background-color: #0A0A0A;
     height: 100%;
     width: 100%;
     display: flex;
@@ -116,6 +125,10 @@ export const ContentContainer = styled.div`
     border-radius: 10px;
     padding: 24px;
     overflow: auto;
+
+    @media screen and (min-width: 768px) {
+	width: 30%;
+    }
 `
 
 export const CloseButton = styled.div`
@@ -287,7 +300,8 @@ export const ResetIcon = styled(IoRefresh)`
 	font-size: 24px;
 `
 
-export const ProfileDetailContainer = styled.div`    display: flex;
+export const ProfileDetailContainer = styled.div`    
+    display: flex;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -345,6 +359,10 @@ export const InputField = styled.input`
     outline: none;
     padding: 8px;
     margin-bottom: 16px;
+
+    @media screen and (min-width: 768px) {
+	height: 50px;
+    }
 `
 
 export const UserIcon = styled(FaUser)`
@@ -404,7 +422,6 @@ export const ProfileActionButtonContainer = styled.div`
     align-items: center;
     gap: 24px;
     margin-top: 8px;
-    margin-bottom: 16px;
 `
 
 export const SkipButton = styled.button`

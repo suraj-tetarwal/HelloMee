@@ -1,4 +1,6 @@
 import { Component } from 'react'
+import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 
 import {
@@ -23,6 +25,13 @@ class LeftSidebar extends Component {
 	handleNavigation = (path) => {
 		const {history} = this.props
 		history.push(path)
+	}
+
+	handleLogout = () => {
+		const {history} = this.props
+		Cookies.remove("jwt_token")
+		toast.info("You've logged out. See you next time!")
+		history.replace("sign-in")
 	}
 
 	render() {
@@ -88,7 +97,7 @@ class LeftSidebar extends Component {
 						</SidebarItemContainer>
 					</SidebarMenuContainer>
 				</TopContainer>
-				<LogoutButton type="button">Logout</LogoutButton>
+				<LogoutButton type="button" onClick={this.handleLogout}>Logout</LogoutButton>
 			</SidebarContainer>
 		)
 	}

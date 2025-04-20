@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 import Divider from '../Divider'
 
@@ -42,7 +43,7 @@ import {
     SubmitButton,
     FooterContainer,
     MessageText,
-    Link,
+    LinkButton,
     DeveloperText,
 } from './styledComponents'
 
@@ -111,6 +112,19 @@ class SignUp extends Component {
         }
     }
 
+    navigateToSignIn = () => {
+	const {history} = this.props
+	history.replace("/sign-in")
+    }
+
+    componentDidMount = () => {
+	const jwtToken = Cookies.get("jwt_token")
+	if (jwtToken) {
+		const {history} = this.props
+		history.replace("/")
+	}
+    }
+
     render() {
         const {showPassword, username, email, password} = this.state
         return (
@@ -131,7 +145,7 @@ class SignUp extends Component {
                     <DesktopContainer>
                         <DesktopContainerHeading>Welcome Back!</DesktopContainerHeading>
                         <DesktopContainerText>To keep connected with us please login <br/> with your account details.</DesktopContainerText>
-                        <SignInButton type="button">SIGN IN</SignInButton>
+                        <SignInButton type="button" onClick={this.navigateToSignIn}>SIGN IN</SignInButton>
                     </DesktopContainer>
                     <FormContainer>
                         <FormHeading>Create Account</FormHeading>
@@ -196,7 +210,7 @@ class SignUp extends Component {
                     <FooterContainer>
                         <MessageText>
                             Already have an account ?  
-                            <Link href="#"> sign in</Link>
+                            <LinkButton onClick={this.navigateToSignIn}>sign in</LinkButton>
                         </MessageText>
                         <DeveloperText>Developed By Suraj</DeveloperText>
                     </FooterContainer>              

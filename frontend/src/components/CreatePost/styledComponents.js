@@ -7,17 +7,21 @@ export const MainContainer = styled.div`
 	flex-direction: column;
 
 	@media screen and (min-width: 768px) {
+		height: 100vh;
 		flex-direction: row;
 	}
 `
 
 export const CreatePostContainer = styled.div`
+	background-color: #000000;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	overflow: auto;
 	padding: 16px;
 
 	@media screen and (min-width: 768px) {
+		width: 40%;
 		padding: 32px;
 	}
 `
@@ -28,6 +32,10 @@ export const CreatePostHeading = styled.div`
 	font-size: 28px;
 	font-weight: 900;
 	text-align: center;
+
+	@media screen and (min-width: 768px) {
+		font-size: 36px;
+	}
 `
 
 export const MediaActionsContainer = styled.div`
@@ -108,7 +116,7 @@ export const TrashIcon = styled(GoTrash)`
 `
 
 export const MediaContainer = styled.div`
-	background-color: #1A1A1A;
+	background-color: #0A0A0A;
 	border: 2px dashed #808080;
 	height: auto;
 	max-height: 50vh;
@@ -185,7 +193,7 @@ export const TextArea = styled.textarea`
 	min-height: 200px;
 	max-height: 200px;
 	width: 100%;
-	background-color: #1A1A1A;
+	background-color: #0A0A0A;
 	color: #FFFFFF;
 	font-family: Jura;
 	font-size: 18px;
@@ -222,7 +230,7 @@ export const ResetButton = styled.button`
 	border-radius: 8px;
 	outline: none;
 	cursor: pointer;
-	box-shadow: 0px 4px 8px rgba(123, 123, 123, 0.4);
+	box-shadow: 0px 2px 4px rgba(123, 123, 123, 0.4);
 	padding-left: 16px;
 	padding-right: 16px;
 `
@@ -238,7 +246,7 @@ export const PostButton = styled.button`
 	border-radius: 8px;
 	outline: none;
 	cursor: pointer;
-	box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+	box-shadow: 0px 2px 4px rgba(0, 123, 255, 0.5);
 	padding-left: 16px;
 	padding-right: 16px;
 `

@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
-	background-color: #000000;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	overflow: auto;
-
+	display: none;
+	
 	@media screen and (min-width: 768px) {
 		width: 40%;
 		flex-grow: 1;
+		background-color: #000000;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		overflow: auto;
 		border-left: 1px solid #808080;
 	}
 `
@@ -92,7 +93,7 @@ export const FormContainer = styled.form`
 	position: sticky;
 	bottom: 0;
 	width: 100%;
-	background-color: #1A1A1A;
+	background-color: #0A0A0A;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -101,7 +102,7 @@ export const FormContainer = styled.form`
 `
 
 export const MessageBox = styled.textarea`
-	background-color: transparent;
+	background-color: #0A0A0A;
 	height: 100px;
 	color: #BDBDBD;
 	font-family: Roboto;

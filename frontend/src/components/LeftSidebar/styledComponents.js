@@ -6,15 +6,19 @@ import { FaUser } from 'react-icons/fa6'
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md'
 
 export const SidebarContainer = styled.div`
-	background-color: #000000;
-	height: 100vh;
-	min-width: 20%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-right: 1px solid #808080;
-	flex-grow: 1;
-	padding: 24px;
+	display: none;
+
+	@media screen and (min-width: 768px) {
+		background-color: #000000;
+		height: 100vh;
+		width: 20%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-right: 1px solid #808080;
+		flex-grow: 1;
+		padding: 24px;
+	}
 `
 
 export const LogoText = styled.p`

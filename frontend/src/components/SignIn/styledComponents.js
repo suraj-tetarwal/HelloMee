@@ -408,7 +408,11 @@ export const MessageText = styled.p`
     text-align: center;
 `
 
-export const Link = styled.a`
+export const LinkButton = styled.button`
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
     color: #007BFF;
     font-family: Jura;
     font-size: 20px;

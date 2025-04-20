@@ -45,7 +45,7 @@ import {
     FooterContainer,
     ForgotYourPassword,
     MessageText,
-    Link,
+    LinkButton,
     DeveloperText,
 } from './styledComponents'
 
@@ -143,6 +143,19 @@ class SignIn extends Component {
         }
     }
 
+    navigateToSignUp = () => {
+	const {history} = this.props
+	history.replace("sign-up")
+    }
+
+    componentDidMount = () => {
+	const jwtToken = Cookies.get("jwt_token")
+	if (jwtToken) {
+		const {history} = this.props
+		history.replace("/")
+	}
+    }
+
     render() {
         const {email, password, showPassword} = this.state
         return (
@@ -214,13 +227,13 @@ class SignIn extends Component {
                     <DesktopContainer>
                         <DesktopContainerHeading>Hello, Friend!</DesktopContainerHeading>
                         <DesktopContainerText>Enter your account details <br/> and start journey with us</DesktopContainerText>
-                        <SignInButton type="button">SIGN UP</SignInButton>
+                        <SignInButton type="button" onClick={this.navigateToSignUp}>SIGN UP</SignInButton>
                     </DesktopContainer>
                     <FooterContainer>
                         <ForgotYourPassword href="#">Forgot your password?</ForgotYourPassword>
                         <MessageText>
                             Don't have an account ? 
-                            <Link href="#"> sign up</Link>
+                            <LinkButton onClick={this.navigateToSignUp}>sign up</LinkButton>
                         </MessageText>
                         <DeveloperText>Developed By Suraj</DeveloperText>
                     </FooterContainer>              

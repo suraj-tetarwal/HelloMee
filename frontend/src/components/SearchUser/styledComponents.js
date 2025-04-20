@@ -8,21 +8,25 @@ export const SearchUserContainer = styled.div`
 
     @media screen and (min-width: 768px) {
 	flex-direction: row;
+	height: 100%;
     }
 `
 
 export const SearchSection = styled.div`
+    background-color: #000000;
     height: 100%;
     padding: 16px;
 
     @media screen and (min-width: 768px) {
-	width: 50%;
+	height: 100vh;
+	width: 40%;
 	padding: 32px;
+	overflow: auto;
     }
 `
 
 export const SearchInputContainer = styled.div`
-    background-color: rgba(30, 30, 30, 0.5);
+    background-color: #0A0A0A;
     border-radius: 4px;
     height: 40px;
     display: flex;
@@ -58,7 +62,7 @@ export const SearchIcon = styled(IoSearch)`
 ` 
 
 export const SearchResultContainer = styled.div`
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,6 +74,7 @@ export const PlaceholderText = styled.p`
     color: #BDBDBD;
     font-family: Jura;
     font-size: 20px;
+    font-weight: 700;
     text-align: center;
 `
 
