@@ -1,0 +1,36 @@
+.not-found-container {
+    min-height: 100vh;
+    background-color: #000;
+    color: #BDBDBD;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Jura", sans-serif;
+    text-align: center;
+}
+
+.not-found-title {
+    font-size: 96px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.not-found-text {
+    font-size: 18px;
+    margin: 12px 0 24px;
+}
+
+.not-found-link {
+    color: #BDBDBD;
+    text-decoration: none;
+    border: 1px solid #BDBDBD;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.not-found-link:hover {
+    background-color: #BDBDBD;
+    color: #000;
+}

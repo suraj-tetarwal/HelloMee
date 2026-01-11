@@ -1,0 +1,31 @@
+.idea-card-container {
+    background-color: #0A0A0A;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px #BDBDBD;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.idea-card-text {
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-family: Jura;
+    font-weight: 500;
+}
+
+.delete-idea-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    align-self: flex-end;
+    margin: 4px;
+}
+
+.delete-idea-button-icon {
+    color: #FFFFFF;
+    font-size: 24px;
+}

@@ -1,0 +1,131 @@
+.post-card-container {
+    width: 100%;
+    background-color: #000000;
+    border-bottom: 3px solid #BDBDBD;
+}
+
+.post-card-header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #BDBDBD;
+    padding: 12px;
+}
+
+.post-card-header-profile-container {
+    background-color: yellowgreen;
+    height: 40px;
+    width: 40px;
+    color: #FFFFFF;
+    font-family: Montez;
+    font-size: 20px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.user-icon {
+    color: #F5F5F5;
+    font-size: 20px;
+}
+
+.post-meta-data-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.username {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-family: Jura;
+    font-weight: 800;
+}
+
+.posted-time {
+    color: #EEEEEE;
+    font-size: 16px;
+    font-family: Jura;
+    font-weight: 500;
+}
+
+.post-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-bottom: 1px solid #BDBDBD;
+    padding: 12px;
+}
+
+.post-text-content {
+    color: #EEEEEE;
+    font-size: 20px;
+    font-family: Jura;
+    font-weight: 500;
+}
+
+.post-media-container {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.post-media {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.post-footer-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+}
+
+.post-action-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.post-action-count {
+    color: #EEEEEE;
+    font-size: 24px;
+    font-family: Jura;
+    font-weight: 500;
+}
+
+.action-icon {
+    color: #EEEEEE;
+    font-size: 24px;
+}
+
+.active-like-icon {
+    color: #FF0000;
+}
+
+.active-bookmark-icon {
+    color: #007BFF;
+}
+
+.delete-post-action-button-container {
+    margin-left: auto;
+}

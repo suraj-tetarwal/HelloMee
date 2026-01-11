@@ -1,0 +1,48 @@
+.user-card-link {
+    text-decoration: none;
+}
+
+.user-card-container {
+    background-color: #1A1A1A;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.user-card-avatar-container {
+    background-color: #9ACD32;
+    height: 60px;
+    width: 60px;
+    color: #FFFFFF;
+    font-family: Montez;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-detail-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.user-card-full-name-text {
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.user-card-username-text {
+    color: #007BFF;
+    font-family: Jura;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}

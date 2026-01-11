@@ -1,0 +1,237 @@
+.create-post-container {
+    background-color: #000000;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.create-post-heading-text {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-family: Jura;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.create-post-form-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-image-button {
+    background-image: linear-gradient(#007BFF, #0056B3);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-bottom: 6px;
+}
+
+.add-image-icon {
+    color: #FFFFFF;
+    font-size: 28px;
+}
+
+.add-image-text {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-family: Jura;
+    font-weight: 500;
+}
+
+.image-input-element {
+    display: none;
+}
+
+.cropped-image-preview-container {
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.cropped-preview-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+.text-input-element {
+    min-height: 300px;
+    width: 100%;
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 18px;
+    font-weight: 500;
+    border: 1px solid #808080;
+    border-radius: 6px;
+    outline: none;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.character-counter-text {
+    color: #BDBDBD;
+    font-size: 18px;
+    font-family: Jura;
+    font-weight: 500;
+    align-self: flex-end;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-button {
+    background-image: linear-gradient(#007BFF, #0056B3);
+    color: #FFFFFF;
+    font-size: 18px;
+    font-family: Jura;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px 10px 20px;
+}
+
+.reset-button {
+    background-image: linear-gradient(#E63946, #B22222);
+    color: #FFFFFF;
+    font-size: 18px;
+    font-family: Jura;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px 10px 20px;
+}
+
+.create-post-loader-container {
+    display: flex;
+    justify-content: center;
+}
+
+.crop-modal-overlay-container {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.open-crop-modal-button {
+    background-image: linear-gradient(#007BFF, #0056B3);
+    color: #FFFFFF;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.crop-modal-content-container {
+    background-color: #1A1A1A;
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.crop-modal-text {
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.crop-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border: 2px dashed #000000;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.preview-image {
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.crop-modal-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crop-modal-crop-button {
+    background-image: linear-gradient(#007BFF, #0056B3);
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px 10px 20px;
+}
+
+.crop-modal-close-button {
+    background-color: gray;
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px 10px 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .crop-modal-content-container {
+        width: 50%;
+    }
+}

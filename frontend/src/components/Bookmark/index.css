@@ -1,0 +1,60 @@
+.bookmark-component-container {
+    background-color: #000000;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.empty-bookmark-post-text-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-bookmark-post-list-text {
+    color: #BDBDBD;
+    font-size: 24px;
+    font-family: Jura;
+    font-weight: 800;
+}
+
+.loader-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bookmark-error-message-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bookmark-error-message {
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.bookmark-retry-button {
+    background: #FF0000;
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px 10px 20px;
+}

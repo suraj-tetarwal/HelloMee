@@ -1,0 +1,62 @@
+.post-feed-container {
+    background-color: #000000;
+    height: 100%;
+    max-width: 100%;
+}
+
+.empty-post-feed-text {
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 50%;
+}
+
+.post-list-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.loader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.failure-message-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.failure-message-text {
+    color: #BDBDBD;
+    font-family: Jura;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.retry-button {
+    background-color: #EE0f0f;
+    color: #FFFFFF;
+    font-family: Jura;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px 10px 20px;
+}
