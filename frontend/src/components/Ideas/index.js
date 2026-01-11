@@ -24,7 +24,7 @@ class Ideas extends Component {
                 return
             }
 
-            const url = "http://localhost:5000/posts"
+            const url = "https://hellomee-1.onrender.com/posts"
             const options = {
                 method: "POST",
                 headers: {
@@ -78,7 +78,7 @@ class Ideas extends Component {
 
             const {ideaContentText, selectedIdeaId} = this.state
 
-            const url = selectedIdeaId ? `http://localhost:5000/ideas/${selectedIdeaId}` : "http://localhost:5000/ideas" 
+            const url = selectedIdeaId ? `https://hellomee-1.onrender.com/ideas/${selectedIdeaId}` : "https://hellomee-1.onrender.com/ideas" 
             const options = {
                 method: selectedIdeaId ? "PUT" : "POST",
                 headers: {
@@ -115,7 +115,7 @@ class Ideas extends Component {
 
             this.setState({ideasList: updatedIdeasList})
 
-            const url = `http://localhost:5000/ideas/${id}`
+            const url = `https://hellomee-1.onrender.com/ideas/${id}`
             const options = {
                 method: "DELETE",
                 headers: {
@@ -142,7 +142,7 @@ class Ideas extends Component {
         try {
             const jwtToken = Cookies.get("jwtToken")
 
-            const url = "http://localhost:5000/ideas"
+            const url = "https://hellomee-1.onrender.com/ideas"
             const options = {
                 method: "GET",
                 headers: {

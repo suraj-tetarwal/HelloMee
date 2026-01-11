@@ -19,7 +19,7 @@ class EditProfile extends Component {
 
             const {userProfileData} = this.state
 
-            const url = "http://localhost:5000/profile"
+            const url = "https://hellomee-1.onrender.com/profile"
             const options = {
                 method: userProfileData.id ? "PUT" : "POST",
                 headers: {
@@ -69,7 +69,7 @@ class EditProfile extends Component {
             this.setState({isLoading: true})
             const jwtToken = Cookies.get("jwtToken")
 
-            const url = "http://localhost:5000/profile"
+            const url = "https://hellomee-1.onrender.com/profile"
             const options = {
                 method: "GET",
                 headers: {

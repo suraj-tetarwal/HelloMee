@@ -44,7 +44,7 @@ class PostFeed extends Component {
             const [postItem] = postsList.filter(eachPost => eachPost.postId === postId)
             const {isLiked}= postItem
 
-            const url = `http://localhost:5000/posts/${postId}/likes`
+            const url = `https://hellomee-1.onrender.com/posts/${postId}/likes`
             const options = {
                 method: isLiked ? "DELETE" : "POST",
                 headers: {
@@ -91,7 +91,7 @@ class PostFeed extends Component {
             const [postItem] = postsList.filter(eachpost => eachpost.postId === postId)
             const {isBookmarked} = postItem
 
-            const url = `http://localhost:5000/bookmarks/${postId}`
+            const url = `https://hellomee-1.onrender.com/bookmarks/${postId}`
             const options = {
                 method: isBookmarked ? "DELETE" : "POST",
                 headers: {
@@ -123,7 +123,7 @@ class PostFeed extends Component {
         try {
             const jwtToken = Cookies.get("jwtToken")
 
-            const url = `http://localhost:5000/posts/${postId}`
+            const url = `https://hellomee-1.onrender.com/posts/${postId}`
             const options = {
                 method: "DELETE",
                 headers: {
@@ -151,7 +151,7 @@ class PostFeed extends Component {
         try {
             this.setState({apiStatus: apiStatusConstants.IN_PROGRESS})
             const jwtToken = Cookies.get("jwtToken")
-            const url = "http://localhost:5000/posts"
+            const url = "https://hellomee-1.onrender.com/posts"
             const options = {
                 method: "GET",
                 headers: {

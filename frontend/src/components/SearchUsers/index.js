@@ -38,7 +38,7 @@ class SearchUsers extends Component {
         try {
             const jwtToken = Cookies.get("jwtToken")
 
-            const url = `http://localhost:5000/search?search_query=${searchText}`
+            const url = `https://hellomee-1.onrender.com/search?search_query=${searchText}`
             const options = {
                 method: "GET",
                 headers: {

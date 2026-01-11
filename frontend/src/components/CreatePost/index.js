@@ -73,7 +73,7 @@ class CreatePost extends Component {
                 formData.append("imageFile", imageFile)
             }
 
-            const url = "http://localhost:5000/posts"
+            const url = "https://hellomee-1.onrender.com/posts"
             const options = {
                 method: "POST",
                 headers: {
@@ -121,7 +121,6 @@ class CreatePost extends Component {
                 const canvas = document.createElement("canvas")
                 const ctx = canvas.getContext("2d")
 
-                // force square output
                 canvas.width = MAX_SIZE
                 canvas.height = MAX_SIZE
 

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -18,7 +18,6 @@ import PublicRoute from "./components/PublicRoute";
 import NotFound from "./components/NotFound";
 
 import "./App.css";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 class App extends Component {
   state = {
@@ -31,7 +30,7 @@ class App extends Component {
 
       if (!jwtToken) return;
 
-      const url = "http://localhost:5000/me";
+      const url = "https://hellomee-1.onrender.com/me";
       const options = {
         method: "GET",
         headers: {

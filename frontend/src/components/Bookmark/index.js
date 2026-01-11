@@ -44,7 +44,7 @@ class Bookmark extends Component {
             const [postItem] = bookmarkedPostList.filter(eachPost => eachPost.postId === postId)
             const {isLiked}= postItem
         
-            const url = `http://localhost:5000/posts/${postId}/likes`
+            const url = `https://hellomee-1.onrender.com/posts/${postId}/likes`
             const options = {
                 method: isLiked ? "DELETE" : "POST",
                 headers: {
@@ -81,7 +81,7 @@ class Bookmark extends Component {
             const [postItem] = bookmarkedPostList.filter(eachpost => eachpost.postId === postId)
             const {isBookmarked} = postItem
         
-            const url = `http://localhost:5000/bookmarks/${postId}`
+            const url = `https://hellomee-1.onrender.com/bookmarks/${postId}`
             const options = {
                 method: isBookmarked ? "DELETE" : "POST",
                 headers: {
@@ -113,7 +113,7 @@ class Bookmark extends Component {
         try {
             const jwtToken = Cookies.get("jwtToken")
         
-            const url = `http://localhost:5000/posts/${postId}`
+            const url = `https://hellomee-1.onrender.com/posts/${postId}`
             const options = {
                 method: "DELETE",
                 headers: {
@@ -143,7 +143,7 @@ class Bookmark extends Component {
 
             const jwtToken = Cookies.get("jwtToken")
 
-            const url = "http://localhost:5000/bookmarks"
+            const url = "https://hellomee-1.onrender.com/bookmarks"
             const options = {
                 method: "GET",
                 headers: {
